@@ -8,6 +8,10 @@ To install the dependencies, run in a shell `npm install` at the root of the pro
 On windows OS some extra configuration are potentially needed concerning the port configuration etc. (we do not try to run our server on Windows plateform)
 [click here](https://coderwall.com/p/mbov6w/running-nodejs-and-express-on-windows)
 
+## Building the code
+
+Since the code is written in [Typescript](https://www.typescriptlang.org/), it needs to be build. To do so, simply run in a shell `npm run build` at the root of the project.
+
 ## Running the server
 
 By default, the port 3000 is used by the server in devlopment mode. Therefore, make sure it is open on your machine.

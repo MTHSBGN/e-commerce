@@ -4,7 +4,8 @@
   "description": "E-commerce website and backend",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "build": "tsc",
+    "start": "node dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,9 @@
   "homepage": "https://github.com/MTHSBGN/e-commerce#readme",
   "dependencies": {
     "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "@types/express": "^4.16.0",
+    "typescript": "^3.1.2"
   }
 }
