@@ -8,9 +8,7 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-  console.log(req.body);
   if (req.body.username === 'admin' && req.body.password === 'admin') {
-    console.log('redirect');
     res.redirect('/');
   } else {
     res.send({ message: 'Invalid credentials' });
