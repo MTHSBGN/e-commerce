@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 11, 2018 at 10:44 AM
+-- Generation Time: Oct 12, 2018 at 10:15 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.0.27
 
@@ -44,8 +44,8 @@ CREATE TABLE `Customer` (
   `email` varchar(254) COLLATE utf8_unicode_ci NOT NULL,
   `username` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
-  `first_name` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
-  `last_name` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `firstname` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `lastname` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `delivery_address` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
   `type` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
