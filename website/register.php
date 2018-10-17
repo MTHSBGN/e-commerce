@@ -1,34 +1,33 @@
 <!DOCTYPE html>
 <?php
 // This page is used to create a new account on the freezer database.
-Include('connectDB.php');
+include 'connectDB.php';
 $error = "";
 
 if (isset($_POST['submit'])) {
-  $error = "";
-  if (!strcmp($_POST['email'], '') || strcmp($_POST['password'], $_POST['repassword'])) {
-    echo $error = "Not the same password!!";
-  } else {
-    $email    = mysqli_real_escape_string($connectDB, $_POST['email']);
-    $username = mysqli_real_escape_string($connectDB, $_POST['username']);
-    $firstname = mysqli_real_escape_string($connectDB, $_POST['firstname']);
-    $lastname = mysqli_real_escape_string($connectDB, $_POST['lastname']);
-    $delivery = mysqli_real_escape_string($connectDB, $_POST['delivery_address']);
-    $type = mysqli_real_escape_string($connectDB, $_POST['type']);
-    $password = mysqli_real_escape_string($connectDB, $_POST['password']);
-    $password = crypt($password, $_SERVER['key_encrypt']); #encrypt the password with a salt
-    $token    = bin2hex(random_bytes(32)); #secure random 1 byte = 2 hexadecimal
-    $sql      = "INSERT INTO Customer(email, username, password, firstname, lastname, delivery_address, type) VALUES('$email', '$username', '$password', '$firstname', '$lastname', '$delivery', '$type')";
-    $res      = mysqli_query($connectDB, $sql);
-    
-    if ($res) {
-      header("location: login.php");
+    $error = "";
+    if (!strcmp($_POST['email'], '') || strcmp($_POST['password'], $_POST['repassword'])) {
+        echo $error = "Not the same password!!";
     } else {
-      $error = "An account with this email already exists!";
+        $email     = mysqli_real_escape_string($connectDB, $_POST['email']);
+        $username  = mysqli_real_escape_string($connectDB, $_POST['username']);
+        $firstname = mysqli_real_escape_string($connectDB, $_POST['firstname']);
+        $lastname  = mysqli_real_escape_string($connectDB, $_POST['lastname']);
+        $delivery  = mysqli_real_escape_string($connectDB, $_POST['delivery_address']);
+        $type      = mysqli_real_escape_string($connectDB, $_POST['type']);
+        $password  = mysqli_real_escape_string($connectDB, $_POST['password']);
+        $password  = crypt($password, $_SERVER['key_encrypt']); #encrypt the password with a salt
+        $sql       = "INSERT INTO Customer(email, username, password, firstname, lastname, delivery_address, type) VALUES('$email', '$username', '$password', '$firstname', '$lastname', '$delivery', '$type')";
+        $res       = mysqli_query($connectDB, $sql);
+
+        if ($res) {
+            header("location: login.php");
+        } else {
+            $error = "An account with this email already exists!";
+        }
     }
-  }
 }
-?> 
+?>
 
 <html>
 

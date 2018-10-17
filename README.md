@@ -1,19 +1,15 @@
 # e-commerce
 
-## Environment and dependencies
+# Minimum pages needed
+- [x] register page
+- [x] Login page
+- [ ] Product catalogue page
+- [ ] Basket validation page
+- [ ] Payment page
+- [x] About information page
+- [x] Admin page (in progress)
 
-In order to run the server, a [Node.js](https://nodejs.org/) run time is needed with its package manager [NPM](https://www.npmjs.com/).
-To install the dependencies, run in a shell `npm install` at the root of the project.
-
-On windows OS some extra configuration are potentially needed concerning the port configuration etc. (we do not try to run our server on Windows plateform)
-[click here](https://coderwall.com/p/mbov6w/running-nodejs-and-express-on-windows)
-
-## Building the code
-
-Since the code is written in [Typescript](https://www.typescriptlang.org/), it needs to be build. To do so, simply run in a shell `npm run build` at the root of the project.
-
-## Running the server
-
-By default, the port 3000 is used by the server in devlopment mode. Therefore, make sure it is open on your machine.
-To start the server, simply run `npm start` at the root of the project.
-A link to the index page will be displayed in the shell. (http://localhost:3000)
+# Database tables minimal requirements
+- [x] `Product`: This table must contain the product id, name, image, price, and quantity in stock (spread into several tables)
+- [x] `Customer`: This table must contain the customer id, username, password, forename, last name and mail
+- [X] `Order`: Including date and time of purchase, product (ids), customer (ids) and quantity.
