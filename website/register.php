@@ -30,35 +30,60 @@ if (isset($_POST['submit'])) {
 ?>
 
 <html>
-
 <head>
     <!--For Mobile devices-->
     <meta name="viewport" content="initial-scale = 1.0, maximum-scale = 1.0, width = device-width">
     <meta http-equiv="Content-Type" content="text/html; charset = utf-8">
-    <link rel="stylesheet" href="./css/login.css">
+    <link rel="stylesheet" href="./css/form.css">
     <title> Sign up </title>
 </head>
-
-<div class="connectPanel">
-    <h1> Sign up </h1>
-    <form class="boxcon" name="registration" method="post" action="register.php">
-        <input type="text" name="email" placeholder="Email" required/>
-        <input type="text" name="username" placeholder="username" required/>
-        <input type="password" name="password" placeholder="Password" required/>
-        <input type="password" name="repassword" placeholder="Pass again" required/>
-        <input type="text" name="firstname" placeholder="first name" required/>
-        <input type="text" name="lastname" placeholder="last name" required/>
-        <input type="text" name="delivery_address" placeholder="ship address" required/>
-        <select name="type" required>
-            <option value="1">Student</option>
-            <option value="2">Teacher</option>
-        </select>
-        <input type="submit" name="submit" value="submit">
-    </form>
-    <div class="error">
+<body>
+    <div id="form-card">
+        <h2>Sign up</h2>
+        <form class="boxcon" name="registration" method="post" action="register.php">
+            <div id="register-name">
+                <div class="form-input">
+                    <input id="register-firstname" type="text" name="firstname" required>
+                    <label for="register-firstname">First name</label>
+                </div>
+                <div class="form-input">
+                    <input id="register-lastname" type="text" name="lastname" required>
+                    <label for="register-lastname">Last name</label>
+                </div>
+            </div>
+            <div class="form-input">
+                <input id="register-username" type="text" name="username" required>
+                <label for="register-username">Username</label>
+            </div>
+            <div class="form-input">
+                <input id="register-email" type="text" name="email" required>
+                <label for="register-email">E-mail</label>
+            </div>
+            <div class="form-input">
+                <input id="register-password" type="password" name="password" required>
+                <label for="register-password">Password</label>
+            </div>
+            <div class="form-input">
+                <input id="register-repassword" type="password" name="repassword" required>
+                <label for="register-repassword">Password</label>
+            </div>
+            <div class="form-input">
+                <input id="register-address" type="text" name="delivery_address" required>
+                <label for="register-address">Shipping address</label>
+            </div>
+            <select name="type" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="1">Alumni</option>
+                <option value="2">Student</option>
+                <option value="3">Teacher</option>
+            </select>
+            
+            <button>Sign up</button>
+        </form>
+        <div class="error">
       <?php echo $error ?>
         <!-- Manage error returned with ejs or anything else -->
+</div>
     </div>
-    </body>
-
+</body>
 </html>

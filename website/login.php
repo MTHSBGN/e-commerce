@@ -39,19 +39,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="initial-scale = 1.0, maximum-scale = 1.0, width = device-width">
     <meta http-equiv="Content-Type" content="text/html; charset = utf-8">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> 
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/form.css">
     <title> Sign in </title>
 </head>
 
 <body>
-    <div id="login-card">
+    <div id="form-card">
         <h2>Sign in</h2>
         <form action="" method="post">
-            <div class="login-input">
+            <div class="form-input">
                 <input id="login-email" type="text" name="email" required>
                 <label for="login-email">E-mail</label>
             </div>
-            <div class="login-input">
+            <div class="form-input">
                 <input id="login-password" type="password" name="password" required>
                 <label for="login-password">Password</label>
             </div>

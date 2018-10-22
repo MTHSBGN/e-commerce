@@ -3,7 +3,7 @@
   font-family: 'Lato', 'sans-serif';
 }
 
-#login-card {
+#form-card {
   display: flex;
   flex-direction: column;
   width: 30vw;
@@ -12,14 +12,14 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
 }
 
-#login-card h2 {
+#form-card h2 {
   padding: 15px;
   text-align: center;
   color: white;
   background-color: #007bff;
 }
 
-#login-card form {
+#form-card form {
   display: flex;
   flex-direction: column;
   padding: 40px 80px 40px 80px;
@@ -29,7 +29,7 @@ form > * {
   margin: 5px 0px 5px 0px;
 }
 
-.login-input {
+.form-input {
   position: relative;
   margin-top: 25px;
 }
@@ -59,9 +59,26 @@ label {
   color: #999999;
   font-size: 18px;
   position: absolute;
-  left: 5px;
+  left: 10px;
   top: 10px;
   transition: 0.2s ease all;
+}
+
+select {
+  font-size: 18px;
+  border: none;
+  border-bottom: 1px solid #757575;
+  padding: 10px;
+  margin: 25px 0px 25px 0px;
+  background-color: transparent;
+  color: black;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+select::focus {
+  outline: none;
 }
 
 #login-forgot-register {
@@ -70,7 +87,7 @@ label {
   margin: 30px 0px 30px 0px;
 }
 
-#login-card button {
+#form-card button {
   text-transform: uppercase;
   color: white;
   font-size: 1.1rem;
@@ -82,8 +99,8 @@ label {
   background-color: #007bff;
 }
 
-#login-card button:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.4);
+#form-card button:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4);
 }
 
 a {
@@ -93,4 +110,12 @@ a {
 
 a:hover {
   color: #004a99;
+}
+
+#register-name {
+  display: flex;
+}
+
+#register-name input {
+  width: 90%;
 }
