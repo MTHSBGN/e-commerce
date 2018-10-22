@@ -61,24 +61,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <p>Not a member? <a href="./register.php">Register</a></p>
             </div>
 
-            <button>Sign in</button>
+            <button value="Connection">Sign in</button>
         </form>
     </div>
-    <!--
-    <div class="connectPanel">
-        <h1> Sign in </h1>
-        <form class="boxcon" action="" method="post">
-            <input type="text" name="email" placeholder="your Email" required/>
-            <input type="password" name="password" placeholder="your Password" required/>
-            <input type="submit" value="Connection" />
-            <br />
-        </form>
-
-        <a class="register" href="./register.php"> Sign up </a>
-        <div class="error">
-            <?php echo $error; ?>
-        </div>
-    </div> -->
 </body>
 
 </html>
