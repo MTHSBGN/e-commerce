@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Test API</title>
+    </head>
+    <body>
+        <script>
+            let xhttp = new XMLHttpRequest();
+
+            xhttp.addEventListener('load', function () {
+                for (user of JSON.parse(this.responseText)) {
+                    console.log(user.email)
+                }
+            })
+
+            xhttp.open('GET', 'http://127.0.0.1:3000/product', true);
+            xhttp.send();
+        </script>
+    </body>
+</html>
