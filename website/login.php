@@ -38,12 +38,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!--For Mobile devices-->
     <meta name="viewport" content="initial-scale = 1.0, maximum-scale = 1.0, width = device-width">
     <meta http-equiv="Content-Type" content="text/html; charset = utf-8">
-    <link rel="stylesheet" href="./css/login.css">
-
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> 
+    <link rel="stylesheet" href="css/login.css">
     <title> Sign in </title>
 </head>
 
 <body>
+    <div id="login-card">
+        <h2>Sign in</h2>
+        <form action="" method="post">
+            <div class="login-input">
+                <input id="login-email" type="text" name="email" required>
+                <label for="login-email">E-mail</label>
+            </div>
+            <div class="login-input">
+                <input id="login-password" type="password" name="password" required>
+                <label for="login-password">Password</label>
+            </div>
+
+            <div id="login-forgot-register">
+                <a href="">Forgot Password?</a>
+                <p>Not a member? <a href="./register.php">Register</a></p>
+            </div>
+
+            <button>Sign in</button>
+        </form>
+    </div>
+    <!--
     <div class="connectPanel">
         <h1> Sign in </h1>
         <form class="boxcon" action="" method="post">
@@ -57,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="error">
             <?php echo $error; ?>
         </div>
-    </div>
+    </div> -->
 </body>
 
 </html>

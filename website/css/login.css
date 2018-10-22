@@ -1,124 +1,96 @@
-html {
-    background-color: #343838;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #8C807E;
-    -webkit-font-smoothing: antialiased;
+* {
+  margin: 0;
+  font-family: 'Lato', 'sans-serif';
 }
 
-body { 
-    margin: 0 auto; /* Imporant */
-    overflow: auto;
-    min-height: 100%;
-    font-size: 16px;
-    line-height: 1.3em;
-}
-.connectPanel {
-    position: relative;
-    z-index: 1; 
-    background: #FFFAF2;
-    max-width: 360px;
-    text-align: center;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-    position: relative;
-    margin: 100px auto;
-    width: 370px;
-    height: 100%;
-    border-radius: 3px;
+#login-card {
+  display: flex;
+  flex-direction: column;
+  width: 30vw;
+  margin: auto;
+  margin-top: 50px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
 }
 
-.connectPanel:before { 
-    content: ''; 
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    bottom: -8px;
-    left: -8px;
-    z-index: -1;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
+#login-card h2 {
+  padding: 15px;
+  text-align: center;
+  color: white;
+  background-color: #007bff;
 }
 
-.connectPanel h1 { 
-    line-height: 55px; 
-    font-size: 24px;
-    font-weight: bold; 
-    text-transform: uppercase;  
-    color: #FFF;
-    text-align: center;
-    background: #3498db; 
-    border-bottom: 5px solid #343838; 
-    border-top-left-radius: 3px; 
-    border-top-right-radius: 3px;
-}
- 
-.boxcon input[type = text], input[type = password] { 
-    font-size: 14px;
-    font-weight: 400;
-    padding: 10px 15px 10px 55px; 
-    position: relative;
-    width: 200px;
-    height: 24px;
-    color: #676056; 
-    border: none;
-    background: #F2F2F2;
-    margin-bottom: 15px;
+#login-card form {
+  display: flex;
+  flex-direction: column;
+  padding: 40px 80px 40px 80px;
 }
 
-.boxcon select {
-    display: block;
-    position: relative;
-    padding: 10px 15px 10px 55px;
-    margin:  0 auto;
-    margin-bottom: 15px;
+form > * {
+  margin: 5px 0px 5px 0px;
 }
 
-input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0px 200px #F7F3EB inset;
+.login-input {
+  position: relative;
+  margin-top: 25px;
 }
 
-.boxcon input[type=submit] {
-    width: 200px;
-    text-align: center;
-    font-size: 14px;
-    font-weight: bold; 
-    padding: 12px 0;
-    letter-spacing: 0;
-    box-shadow: inset 0px 0px 0px 0px #1ABC9C; 
-    color: #FFF;
-    background-color: #4E5066;  
-    text-shadow: none;
-    text-transform: uppercase; 
-    border: none;
-    cursor: pointer;
-    position: relative;
-    margin-bottom: 20px;
-} 
-
-.error {
-    font-size:11px;
-    font-weight: bold;
-    color: #3498db;
-    margin-top:10px;
-} 
-
-.register {
-    width: 200px;
-    text-align: center;
-    font-size: 14px;
-    font-weight: bold;
-    padding: 5px 0;
-    letter-spacing: 0; 
-    box-shadow: inset 0px 0px 0px 0px #1ABC9C; 
-    color: #FFF;
-    background-color: #4E5066; 
-    text-shadow: none;
-    text-transform: uppercase; 
-    border: none;
-    cursor: pointer;
-    position: relative; 
-    margin-bottom: 20px;
-    text-decoration: none;  
-    display: inline-block;
+input {
+  margin: auto;
+  display: block;
+  font-size: 18px;
+  padding: 10px 10px 10px 5px;
+  border: none;
+  border-bottom: 1px solid #757575;
+  width: 95%;
 }
 
+input:focus {
+  outline: none;
+}
 
+input:focus ~ label,
+input:valid ~ label {
+  top: -20px;
+  font-size: 14px;
+  color: #007bff;
+}
+
+label {
+  color: #999999;
+  font-size: 18px;
+  position: absolute;
+  left: 5px;
+  top: 10px;
+  transition: 0.2s ease all;
+}
+
+#login-forgot-register {
+  display: flex;
+  justify-content: space-around;
+  margin: 30px 0px 30px 0px;
+}
+
+#login-card button {
+  text-transform: uppercase;
+  color: white;
+  font-size: 1.1rem;
+  padding: 20px;
+  border: 0px;
+  width: 100%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+  transition: 0.5s;
+  background-color: #007bff;
+}
+
+#login-card button:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.4);
+}
+
+a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+a:hover {
+  color: #004a99;
+}
