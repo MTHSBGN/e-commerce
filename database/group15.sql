@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 22, 2018 at 11:08 AM
+-- Generation Time: Oct 22, 2018 at 05:27 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.0.27
 
@@ -39,7 +39,9 @@ CREATE TABLE `Category` (
 --
 
 INSERT INTO `Category` (`category_id`, `description_id`, `name`) VALUES
-(1, 1, 'Pull');
+(1, 1, 'Pull'),
+(2, 2, 'shoes'),
+(3, 3, 'bic');
 
 -- --------------------------------------------------------
 
@@ -82,7 +84,9 @@ CREATE TABLE `Description` (
 --
 
 INSERT INTO `Description` (`description_id`, `french`, `english`) VALUES
-(1, 'pulls fr', 'pull en');
+(1, 'pull de qualité supérieure', 'high quality sweater'),
+(2, 'chaussures', 'shoes'),
+(3, 'stylo', 'bic');
 
 -- --------------------------------------------------------
 
@@ -114,8 +118,8 @@ CREATE TABLE `Product` (
 --
 
 INSERT INTO `Product` (`product_id`, `description_id`, `category_id`, `name`) VALUES
-(1, 1, 1, 'pull avengers'),
-(2, 1, 1, 'pull avengers');
+(1, 1, 1, 'pull FACSA'),
+(2, 1, 1, 'pull HEC');
 
 -- --------------------------------------------------------
 
@@ -149,7 +153,12 @@ CREATE TABLE `Sku` (
 --
 
 INSERT INTO `Sku` (`sku_id`, `price`, `quantity`, `sold`) VALUES
-('PULL_AV_S', 20, 5, 0);
+('PULL_FACSA_L', 30, 4, 0),
+('PULL_FACSA_M', 30, 8, 0),
+('PULL_FACSA_S', 30, 10, 0),
+('PULL_FACSA_XL', 35, 5, 0),
+('PULL_FACSA_XXL', 35, 2, 0),
+('PULL_FACSA_XXXL', 35, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -170,7 +179,7 @@ CREATE TABLE `Variant` (
 --
 
 INSERT INTO `Variant` (`variant_id`, `sku_id`, `product_id`, `attribute`, `value`) VALUES
-(1, 'PULL_AV_S', 1, 'size', 's');
+(1, 'PULL_FACSA_S', 1, 'size', 's');
 
 --
 -- Indexes for dumped tables
@@ -241,7 +250,7 @@ ALTER TABLE `Variant`
 -- AUTO_INCREMENT for table `Category`
 --
 ALTER TABLE `Category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `Customer`
@@ -253,7 +262,7 @@ ALTER TABLE `Customer`
 -- AUTO_INCREMENT for table `Description`
 --
 ALTER TABLE `Description`
-  MODIFY `description_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `description_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `Order_details`

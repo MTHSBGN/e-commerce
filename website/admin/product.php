@@ -48,20 +48,19 @@ include 'modules/product.php';
             <input type="text" name="sku_id" placeholder=" sku id">
             <input type="number" name="price" placeholder="price">
             <input type="number" name="quantity" placeholder="quantity">
-            <input type="submit" name="submit" value="add_product">
+            <input type="submit" name="submit" value="add">
           </div>
         </form>
 
         <h2>Add a new sku for existing product</h2>
 
         <form class="form-container" method="POST" action="./modules/forms/addSku.php">
-          <h1>Add a new skut</h1>
+          <h1>Add a new sku</h1>
           <div id="pass-form">
-            <input type="text" name="sku_id" placeholder=" sku id">
-            <input type="number" name="product_id" placeholder="product id">
+            <input type="text" name="sku_id" placeholder="sku id">
             <input type="number" name="price" placeholder="price">
             <input type="number" name="quantity" placeholder="quantity">
-            <input type="submit" name="submit" value="add_variant">
+            <input type="submit" name="submit" value="add">
           </div>
         </form>
 
@@ -74,7 +73,7 @@ include 'modules/product.php';
             <input type="number" name="product_id" placeholder="product id">
             <input type="text" name="attr" placeholder="attribute">
             <input type="text" name="value" placeholder="value">
-            <input type="submit" name="submit" value="add_variant">
+            <input type="submit" name="submit" value="add">
           </div>
         </form>
       </section>

@@ -4,10 +4,10 @@
 include 'connectDB.php';
 $error = "";
 
-if (isset($_POST['submit'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST")  {
     $error = "";
     if (!strcmp($_POST['email'], '') || strcmp($_POST['password'], $_POST['repassword'])) {
-        echo $error = "Not the same password!!";
+        $error = "Not the same password!!";
     } else {
         $email     = mysqli_real_escape_string($connectDB, $_POST['email']);
         $username  = mysqli_real_escape_string($connectDB, $_POST['username']);

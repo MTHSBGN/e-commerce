@@ -27,5 +27,5 @@ if (isset($_POST['submit'])) {
     INSERT INTO Sku(sku_id, price, quantity) VALUES('$sku_id', '$price', '$quantity')";
     $res = mysqli_multi_query($connectDB, $sql);
     //TODO check the res and redirect if problems
-    header('Location: ../../products.php');
+    header('Location: ../../product.php');
 }
