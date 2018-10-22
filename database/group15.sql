@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 12, 2018 at 10:15 AM
+-- Generation Time: Oct 22, 2018 at 11:08 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.0.27
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ecommerce`
+-- Database: `group15`
 --
 
 -- --------------------------------------------------------
@@ -30,8 +30,16 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `Category` (
   `category_id` int(11) NOT NULL,
+  `description_id` int(11) NOT NULL,
   `name` varchar(128) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `Category`
+--
+
+INSERT INTO `Category` (`category_id`, `description_id`, `name`) VALUES
+(1, 1, 'Pull');
 
 -- --------------------------------------------------------
 
@@ -50,6 +58,13 @@ CREATE TABLE `Customer` (
   `type` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `Customer`
+--
+
+INSERT INTO `Customer` (`client_id`, `email`, `username`, `password`, `firstname`, `lastname`, `delivery_address`, `type`) VALUES
+(1, 'admin@gmail.com', 'admin', '$6$rounds=5000$qDkTfHiTaWeaIOgz$Q9IiZgZYSDc5Q..Pnv.jooJIwu66CmB2xTtMumGDv208I3METsYb5XW/Ms/fAbpQtvrktQNVIFlDN0474WZ6w0', 'admin', 'admin', 'nothing', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -61,6 +76,13 @@ CREATE TABLE `Description` (
   `french` text COLLATE utf8_unicode_ci NOT NULL,
   `english` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `Description`
+--
+
+INSERT INTO `Description` (`description_id`, `french`, `english`) VALUES
+(1, 'pulls fr', 'pull en');
 
 -- --------------------------------------------------------
 
@@ -87,6 +109,14 @@ CREATE TABLE `Product` (
   `name` varchar(128) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `Product`
+--
+
+INSERT INTO `Product` (`product_id`, `description_id`, `category_id`, `name`) VALUES
+(1, 1, 1, 'pull avengers'),
+(2, 1, 1, 'pull avengers');
+
 -- --------------------------------------------------------
 
 --
@@ -110,8 +140,16 @@ CREATE TABLE `Product_order` (
 CREATE TABLE `Sku` (
   `sku_id` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `price` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL
+  `quantity` int(11) NOT NULL,
+  `sold` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `Sku`
+--
+
+INSERT INTO `Sku` (`sku_id`, `price`, `quantity`, `sold`) VALUES
+('PULL_AV_S', 20, 5, 0);
 
 -- --------------------------------------------------------
 
@@ -128,6 +166,13 @@ CREATE TABLE `Variant` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
+-- Dumping data for table `Variant`
+--
+
+INSERT INTO `Variant` (`variant_id`, `sku_id`, `product_id`, `attribute`, `value`) VALUES
+(1, 'PULL_AV_S', 1, 'size', 's');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -135,14 +180,16 @@ CREATE TABLE `Variant` (
 -- Indexes for table `Category`
 --
 ALTER TABLE `Category`
-  ADD PRIMARY KEY (`category_id`);
+  ADD PRIMARY KEY (`category_id`),
+  ADD KEY `description_id` (`description_id`);
 
 --
 -- Indexes for table `Customer`
 --
 ALTER TABLE `Customer`
   ADD PRIMARY KEY (`client_id`),
-  ADD UNIQUE KEY `mail` (`email`);
+  ADD UNIQUE KEY `mail` (`email`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- Indexes for table `Description`
@@ -194,19 +241,19 @@ ALTER TABLE `Variant`
 -- AUTO_INCREMENT for table `Category`
 --
 ALTER TABLE `Category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `Customer`
 --
 ALTER TABLE `Customer`
-  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `Description`
 --
 ALTER TABLE `Description`
-  MODIFY `description_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `description_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `Order_details`
@@ -218,7 +265,7 @@ ALTER TABLE `Order_details`
 -- AUTO_INCREMENT for table `Product`
 --
 ALTER TABLE `Product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `Product_order`
@@ -230,11 +277,17 @@ ALTER TABLE `Product_order`
 -- AUTO_INCREMENT for table `Variant`
 --
 ALTER TABLE `Variant`
-  MODIFY `variant_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `variant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `Category`
+--
+ALTER TABLE `Category`
+  ADD CONSTRAINT `Category_ibfk_1` FOREIGN KEY (`description_id`) REFERENCES `Description` (`description_id`);
 
 --
 -- Constraints for table `Order_details`

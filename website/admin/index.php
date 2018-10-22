@@ -5,44 +5,20 @@
 include 'admin_active_session.php';
 include 'modules/product.php';
 $message = "";
-#echo "<p>hellloooooo</p>";
 if (isset($_POST['submit'])) {
-  echo "<p>hellloooooo</p>";
     switch ($_POST['submit']) {
         case 'add':
-            echo "hellloooooo";
-            //tmp();
-            addProduct($_POST['cat_name'], $_POST['french'], $_POST['english']);
+            addCategory($connectDB, $_POST['cat_name'], $_POST['french'], $_POST['english']);
             break;
-        case 'update':
-            updateProduct();
+        case 'add_product':
+            addProduct($connectDB, $_POST['name'], $_POST['cat'], $_POST['descr'], $_POST['sku_id'], $_POST['price'], $_POST['quantity']);
+            break;
+        case 'add_variant':
+            addVariant($connectDB, $_POST['sku_id'], $_POST['product_id'], $_POST['attr'], $_POST['value']);
             break;
     }
 }
 
-// This function is used to display the different
-// types of products present in the database
-function displayTypes()
-{
-    global $connectDB;
-    $error = "";
-    $table = '<table class="tableLib"><tr><th>ID</th><th>type_name_en</th><th>type_name_fr</th></tr>';
-
-    $query  = "SELECT * FROM Description_type";
-    $result = mysqli_query($connectDB, $query);
-    $rows   = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    //Display each product type
-    foreach ($rows as $row) {
-        $table .= "<tr>";
-        $table .= "<td>" . $row['type_id'] . "</td>";
-        $table .= "<td>" . $row['type_name_en'] . "</td>";
-        $table .= "<td>" . $row['type_name_fr'] . "</td>";
-        $table .= "</tr>";
-    }
-
-    $table .= "</table>";
-    echo $table;
-}
 ?>
 
 <html>
@@ -80,9 +56,6 @@ function displayTypes()
     <h2>Display types</h2>
     <p> To display/hide the types please click on the button:</p>
     <button id="typeBtn" onclick="setVisibility('types_section')">Click me</button>
-    <div id="types_section" style="display:none">
-      <?php displayTypes();?>
-    </div>
 
     <h2>Add a new type of product</h2>
 
@@ -96,6 +69,35 @@ function displayTypes()
         <input type="submit" name="submit" value="add">
       </div>
     </form>
+
+    <h2>Add a new product</h2>
+
+    <form class="form-container" method="POST" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>">
+      <h1>Add a new product</h1>
+      <div id="pass-form">
+        <input type="text" name="name" placeholder="name">
+        <input type="number" name="cat" placeholder="category id">
+        <input type="number" name="descr" placeholder=" description id">
+        <input type="text" name="sku_id" placeholder=" sku id">
+        <input type="number" name="price" placeholder="price">
+        <input type="number" name="quantity" placeholder="quantity">
+        <input type="submit" name="submit" value="add_product">
+      </div>
+    </form>
+
+
+        <h2>Add a new variant</h2>
+
+<form class="form-container" method="POST" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>">
+  <h1>Add a new variant</h1>
+  <div id="pass-form">
+    <input type="text" name="sku_id" placeholder=" sku id">
+    <input type="number" name="product_id" placeholder="product id">
+    <input type="text" name="attr" placeholder="attribute">
+    <input type="text" name="value" placeholder="value">
+    <input type="submit" name="submit" value="add_variant">
+  </div>
+</form>
   </section>
 
   <footer class="footer-basic-centered">

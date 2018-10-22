@@ -5,7 +5,7 @@
 $serverName = "localhost";
 $username   = "root";
 $password   = "";
-$database   = "ecommerce";
+$database   = "group15";
 $connectDB  = mysqli_connect($serverName, $username, $password, $database);
 // set the charset to utf8
 mysqli_set_charset($connectDB, "utf8");
