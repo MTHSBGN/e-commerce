@@ -17,11 +17,10 @@ include '../../admin_active_session.php';
 
 if (isset($_POST['submit'])) {
     $sku_id     = mysqli_real_escape_string($connectDB, $_POST['sku_id']);
-    $product_id = mysqli_real_escape_string($connectDB, $_POST['product_id']);
     $attribute  = mysqli_real_escape_string($connectDB, $_POST['attr']);
     $value      = mysqli_real_escape_string($connectDB, $_POST['value']);
 
-    $sql = "INSERT INTO Variant(sku_id, product_id, attribute, value) VALUES('$sku_id', '$product_id', '$attribute', '$value');";
+    $sql = "INSERT INTO Variant(sku_id, attribute, value) VALUES('$sku_id', '$attribute', '$value');";
     $res = mysqli_multi_query($connectDB, $sql);
     //TODO check the res and redirect if problems
     header('Location: ../../product.php');

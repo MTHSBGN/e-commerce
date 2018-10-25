@@ -37,17 +37,15 @@ include 'modules/product.php';
     <?php include './modules/navbar.php' ?>
     <div class="container">
       <section>
-        <h2>Add a new product</h2>
+        <h2>Add a new product description</h2>
 
         <form class="form-container" method="POST" action="./modules/forms/addProduct.php">
-          <h1>Add a new product</h1>
+          <h1>Add a new product description</h1>
           <div id="pass-form">
             <input type="text" name="name" placeholder="name">
             <input type="number" name="cat" placeholder="category id">
-            <input type="number" name="descr" placeholder=" description id">
-            <input type="text" name="sku_id" placeholder=" sku id">
-            <input type="number" name="price" placeholder="price">
-            <input type="number" name="quantity" placeholder="quantity">
+            <input type="textarea" name="french" placeholder="french description">
+            <input type="textarea" name="english" placeholder="english description">
             <input type="submit" name="submit" value="add">
           </div>
         </form>
@@ -57,8 +55,9 @@ include 'modules/product.php';
         <form class="form-container" method="POST" action="./modules/forms/addSku.php">
           <h1>Add a new sku</h1>
           <div id="pass-form">
+            <input type="number" name="product_id" placeholder="product id">
             <input type="text" name="sku_id" placeholder="sku id">
-            <input type="number" name="price" placeholder="price">
+            <input type="number" step="0.01" name="price" placeholder="price">
             <input type="number" name="quantity" placeholder="quantity">
             <input type="submit" name="submit" value="add">
           </div>
@@ -70,7 +69,6 @@ include 'modules/product.php';
           <h1>Add a new variant</h1>
           <div id="pass-form">
             <input type="text" name="sku_id" placeholder=" sku id">
-            <input type="number" name="product_id" placeholder="product id">
             <input type="text" name="attr" placeholder="attribute">
             <input type="text" name="value" placeholder="value">
             <input type="submit" name="submit" value="add">

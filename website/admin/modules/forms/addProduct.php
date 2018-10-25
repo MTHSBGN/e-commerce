@@ -16,15 +16,13 @@ include '../../../connectDB.php';
 include '../../admin_active_session.php';
 
 if (isset($_POST['submit'])) {
-    $name     = mysqli_real_escape_string($connectDB, $_POST['name']);
-    $cat      = mysqli_real_escape_string($connectDB, $_POST['cat']);
-    $descr    = mysqli_real_escape_string($connectDB, $_POST['descr']);
-    $sku_id   = mysqli_real_escape_string($connectDB, $_POST['sku_id']);
-    $price    = mysqli_real_escape_string($connectDB, $_POST['price']);
-    $quantity = mysqli_real_escape_string($connectDB, $_POST['quantity']);
+    $name          = mysqli_real_escape_string($connectDB, $_POST['name']);
+    $cat           = mysqli_real_escape_string($connectDB, $_POST['cat']);
+    $french_descr  = mysqli_real_escape_string($connectDB, $_POST['french']);
+    $english_descr = mysqli_real_escape_string($connectDB, $_POST['english']);
 
-    $sql = "INSERT INTO Product(description_id, category_id, name) VALUES('$descr', '$cat', '$name');
-    INSERT INTO Sku(sku_id, price, quantity) VALUES('$sku_id', '$price', '$quantity')";
+    $sql = "INSERT INTO Description(french, english) VALUES('$french_descr', '$english_descr');
+    INSERT INTO Product(description_id, category_id, name) VALUES(LAST_INSERT_ID(), '$cat', '$name')";
     $res = mysqli_multi_query($connectDB, $sql);
     //TODO check the res and redirect if problems
     header('Location: ../../product.php');

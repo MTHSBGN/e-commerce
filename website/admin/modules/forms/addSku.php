@@ -16,11 +16,12 @@ include '../../../connectDB.php';
 include '../../admin_active_session.php';
 
 if (isset($_POST['submit'])) {
-    $sku_id   = mysqli_real_escape_string($connectDB, $_POST['sku_id']);
-    $price    = mysqli_real_escape_string($connectDB, $_POST['price']);
-    $quantity = mysqli_real_escape_string($connectDB, $_POST['quantity']);
+    $sku_id     = mysqli_real_escape_string($connectDB, $_POST['sku_id']);
+    $product_id = mysqli_real_escape_string($connectDB, $_POST['product_id']);
+    $price      = mysqli_real_escape_string($connectDB, $_POST['price']);
+    $available  = mysqli_real_escape_string($connectDB, $_POST['quantity']);
 
-    $sql = "INSERT INTO Sku(sku_id, price, quantity) VALUES('$sku_id', '$price', '$quantity')";
+    $sql = "INSERT INTO Sku(sku_id, product_id, price, available) VALUES('$sku_id', '$product_id', '$price', '$available');";
     $res = mysqli_multi_query($connectDB, $sql);
     //TODO check the res and redirect if problems
     header('Location: ../../product.php');
