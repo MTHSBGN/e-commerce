@@ -30,6 +30,8 @@ h1 {
 
 #pass-form input[type="email"],
 #pass-form input[type="text"],
+#pass-form input[type="number"],
+#pass-form input[type="textarea"],
 #pass-form input[type="password"],
 #pass-form select,
 #pass-form textarea {

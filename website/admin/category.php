@@ -37,16 +37,6 @@ include 'modules/product.php';
   <?php include './modules/navbar.php' ?>
   <div class="container">
   <section>
-    <h2>Admin panel</h2>
-    <p>
-      Welcome on the admin panel. The panel is really simple it only gives the different types of products and the
-      possibility
-      to add a new type of product.
-    </p>
-    <h2>Display types</h2>
-    <p> To display/hide the types please click on the button:</p>
-    <button id="typeBtn" onclick="setVisibility('types_section')">Click me</button>
-
     <h2>Add a new type of product</h2>
 
     <form class="form-container" method="POST" action="./modules/forms/addCategory.php">

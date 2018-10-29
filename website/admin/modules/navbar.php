@@ -1,7 +1,7 @@
 <!-- Sidebar -->
 <nav id="sidebar">
   <div class="sidebar-header">
-    <h3>Dashboard</h3>
+    <h2>Dashboard</h2>
   </div>
 
   <ul class="list-unstyled components">

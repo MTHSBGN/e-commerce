@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="./css/tablecss.css">
   <link rel="stylesheet" href="./css/footer.css">
   <link rel="stylesheet" href="./css/navbar.css">
+  <link rel="stylesheet" href="./css/body.css">
   <!--Link for style of table -->
 
   <title>Admin Panel</title>
