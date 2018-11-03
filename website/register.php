@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")  {
         if ($res) {
             header("location: login.php");
         } else {
-            $error = "An account with this email already exists!";
+            $error = "An account with this email/username already exists!";
         }
     }
 }

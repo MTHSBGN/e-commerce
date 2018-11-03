@@ -17,7 +17,7 @@ include '../../admin_active_session.php';
 
 if (isset($_POST['submit'])) {
     header('Content-Type: application/csv');
-    header('Content-Disposition: attachment; filename="test.csv";');
+    header('Content-Disposition: attachment; filename="products.csv";');
     $out = fopen('php://output', 'w');
     $sql = "SELECT * FROM Product INNER JOIN Sku ON Product.product_id = Sku.product_id;";
     $res = mysqli_query($connectDB, $sql);

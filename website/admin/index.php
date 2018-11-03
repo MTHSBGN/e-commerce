@@ -83,6 +83,17 @@ include 'modules/product.php';
           </div>
         </div>
       </div>
+
+
+      <form class="form-container" style="text-align:center" method="POST" action="./modules/export/export_products.php">
+        <h2>Products export csv</h2>
+        <input type="submit" name="submit" value="export">
+      </form>
+
+      <form class="form-container" style="text-align:center" method="POST" action="./modules/export/export_skus.php">
+        <h2>Sku-variant export csv</h2>
+        <input type="submit" name="submit" value="export">
+      </form>
     </div>
   </div>
 
@@ -90,9 +101,6 @@ include 'modules/product.php';
     <p> Website built by: Loïc Lejoly </p>
     <p> University of Liège </p>
   </footer>
-  <form class="form-container" method="POST" action="./modules/export/export_products.php">
-    <input type="submit" name="submit" value="export">
-  </form>
 </body>
 <script>
   // This function allows to set the visibility of an element

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 25, 2018 at 04:39 PM
+-- Generation Time: Nov 03, 2018 at 05:27 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.0.27
 
@@ -39,7 +39,7 @@ CREATE TABLE `Category` (
 --
 
 INSERT INTO `Category` (`category_id`, `description_id`, `name`) VALUES
-(1, 1, 'Pull'),
+(1, 1, 'pull'),
 (2, 2, 'books'),
 (3, 3, 'drink'),
 (4, 4, 'food'),
@@ -234,7 +234,7 @@ INSERT INTO `Sku` (`sku_id`, `product_id`, `price`, `available`, `sold`) VALUES
 ('PRODIR_HEC', 16, 1.45, 5, 0),
 ('USB_KEY_HEC', 11, 5.65, 5, 0),
 ('WEIGHT_HEC', 14, 3.75, 5, 0),
-('WINE_HM_20012', 20, 15, 12, 0),
+('WINE_HM_2012', 20, 15, 12, 0),
 ('WINE_INSOUMISE', 21, 16, 30, 0);
 
 -- --------------------------------------------------------
@@ -259,7 +259,40 @@ INSERT INTO `Variant` (`variant_id`, `sku_id`, `attribute`, `value`) VALUES
 (4, 'BOOK_LG_EN', 'language', 'english'),
 (5, 'BOOK_LG_DE', 'language', 'german'),
 (6, 'BOOK_LG_NL', 'language', 'nederland'),
-(7, 'BOOK_LG_EVENT', 'language', 'francais');
+(7, 'BOOK_LG_EVENT', 'language', 'francais'),
+(8, 'BADGE_HEC', 'images', '{\"images\":[\"badge_hec_img_1.jpg\"]}'),
+(9, 'BAG_HEC', 'images', '{\"images\":[\"bag_hec_img_1.png\", \"bag_hec_img_2.jpg\"]}'),
+(10, 'BIC_HEC_BLUE', 'images', '{\"images\":[\"bic_hec_img_1.png\"]}'),
+(11, 'BIC_HEC_GREEN', 'images', '{\"images\":[\"bic_hec_img_1.png\"]}'),
+(12, 'BIC_HEC_PURPLE', 'images', '{\"images\":[\"bic_hec_img_1.png\"]}'),
+(13, 'BIC_HEC_YELLOW', 'images', '{\"images\":[\"bic_hec_img_1.png\"]}'),
+(14, 'BONBON_HEC', 'images', '{\"images\":[\"bonbons_hec_img_1.png\", \"bonbons_hec_img_2.png\"]}'),
+(15, 'BOOK_LG_EN', 'images', '{\"images\":[\"book_lg_en_img_1.png\"]}'),
+(16, 'BOOK_LG_FR', 'images', '{\"images\":[\"book_lg_en_img_1.png\"]}'),
+(17, 'BOOK_LG_NL', 'images', '{\"images\":[\"book_lg_nl_img_1.png\"]}'),
+(18, 'BOOK_LG_DE', 'images', '{\"images\":[\"book_lg_nl_img_1.png\"]}'),
+(19, 'BOOK_LG_EVENT', 'images', '{\"images\":[\"book_lg_event_img_1.png\"]}'),
+(20, 'CHAMP_LP', 'images', '{\"images\":[\"champ_lp_img_1.jpg\"]}'),
+(21, 'CURTIUS_D_PACK', 'images', '{\"images\":[\"curtius_img_1.png\"]}'),
+(22, 'DARCIS_10_DELUXE', 'images', '{\"images\":[\"darcis_10_deluxe_img_1.png\"]}'),
+(23, 'DARCIS_10', 'images', '{\"images\":[\"darcis_10_img_1.jpg\"]}'),
+(24, 'DARCIS_20_DELUXE', 'images', '{\"images\":[\"darcis_20_deluxe_img_1.png\"]}'),
+(25, 'FARDE_HEC', 'images', '{\"images\":[\"fard_hec_img_1.png\", \"fard_hec_img_2.jpg\"]}'),
+(26, 'GOURD_HEC_ALUMNI', 'images', '{\"images\":[\"gourd_hec_alumni_img_1.jpg\"]}'),
+(27, 'GOURD_HEC_NORMAL', 'images', '{\"images\":[\"gourd_hec_img_1.jpg\"]}'),
+(28, 'HAT_HEC', 'images', '{\"images\":[\"hat_hec_img_1.jpg\", \"hat_hec_img_2.jpg\"]}'),
+(29, 'MAIGRET_COLL', 'images', '{\"images\":[\"maigret_img_1.png\"]}'),
+(30, 'MUG_HEC_BLACK', 'images', '{\"images\":[\"mug_hec_black_img_1.jpg\", \"mug_hec_black_img_2.jpg\"]}'),
+(31, 'MUG_HEC_BLUE', 'images', '{\"images\":[\"mug_hec_blue_img_1.jpg\", \"mug_hec_blue_img_2.jpg\"]}'),
+(32, 'MUG_HEC_GREEN', 'images', '{\"images\":[\"mug_hec_green_img_1.jpg\", \"mug_hec_green_img_2.jpg\"]}'),
+(33, 'MUG_HEC_ORANGE', 'images', '{\"images\":[\"mug_hec_orange_img_1.jpg\", \"mug_hec_orange_img_2.jpg\"]}'),
+(34, 'MUG_HEC_YELLOW', 'images', '{\"images\":[\"mug_hec_yellow_img_1.jpg\", \"mug_hec_yellow_img_2.jpg\"]}'),
+(35, 'NOTE_HEC_A5', 'images', '{\"images\":[\"note_hec_a5_img_1.png\", \"note_hec_a5_img_2.png\"]}'),
+(36, 'PINS_HEC', 'images', '{\"images\":[\"pins_hec_img_1.png\", \"pins_hec_img_2.png\"]}'),
+(37, 'USB_KEY_HEC', 'images', '{\"images\":[\"usb_hec_img_1.png\", \"usb_hec_img_2.png\"]}'),
+(38, 'WEIGHT_HEC', 'images', '{\"images\":[\"wheight_hec_img_1.png\", \"wheight_hec_img_2.png\", \"wheight_hec_img_3.png\"]}'),
+(39, 'WINE_HM_2012', 'images', '{\"images\":[\"wine_hm_2012_img_1.jpg\", \"wine_hm_2012_img_2.jpg\", \"wine_hm_2012_img_3.jpg\"]}'),
+(40, 'WINE_INSOUMISE', 'images', '{\"images\":[\"wine_insoumise_img_1.jpg\", \"wine_insoumise_img_2.jpg\"]}');
 
 --
 -- Indexes for dumped tables
@@ -336,7 +369,7 @@ ALTER TABLE `Category`
 -- AUTO_INCREMENT for table `Customer`
 --
 ALTER TABLE `Customer`
-  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `Description`
@@ -360,7 +393,7 @@ ALTER TABLE `Product_order`
 -- AUTO_INCREMENT for table `Variant`
 --
 ALTER TABLE `Variant`
-  MODIFY `variant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `variant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- Constraints for dumped tables
