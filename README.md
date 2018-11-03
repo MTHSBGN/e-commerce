@@ -7,7 +7,7 @@
 - [ ] Basket validation page
 - [ ] Payment page
 - [x] About information page
-- [x] Admin page (in progress)
+- [x] Admin page
 
 # Database tables minimal requirements
 - [x] `Product`: This table must contain the product id, name, image, price, and quantity in stock (spread into several tables)
