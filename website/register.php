@@ -1,29 +1,64 @@
 <!DOCTYPE html>
 <?php
-// This page is used to create a new account on the freezer database.
 include 'connectDB.php';
+
+/*
+Check if the username is available in the database. If it is the case return true
+*/
+function check_username($name)
+{
+    $sql      = "SELECT * FROM Customer WHERE username = '$name';";
+    $response = mysqli_query($GLOBALS['connectDB'], $sql);
+    $row_cnt  = mysqli_num_rows($response);
+    if ($row_cnt == 1) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+/*
+Check if the email is available in the database. If it is the case return true
+*/
+function check_email($name)
+{
+    $sql      = "SELECT * FROM Customer WHERE email = '$name';";
+    $response = mysqli_query($GLOBALS['connectDB'], $sql);
+    $row_cnt  = mysqli_num_rows($response);
+    if ($row_cnt == 1) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
 $error = "";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST")  {
-    $error = "";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $error     = "";
+    $email     = mysqli_real_escape_string($connectDB, $_POST['email']);
+    $username  = mysqli_real_escape_string($connectDB, $_POST['username']);
+    $firstname = mysqli_real_escape_string($connectDB, $_POST['firstname']);
+    $lastname  = mysqli_real_escape_string($connectDB, $_POST['lastname']);
+    $delivery  = mysqli_real_escape_string($connectDB, $_POST['delivery_address']);
+    $type      = mysqli_real_escape_string($connectDB, $_POST['type']);
+    $password  = mysqli_real_escape_string($connectDB, $_POST['password']);
+
     if (!strcmp($_POST['email'], '') || strcmp($_POST['password'], $_POST['repassword'])) {
         $error = "Not the same password!!";
+    } else if (!check_username($username)) {
+        $error = "This username already exists";
+    } else if (!check_email($email)) {
+        $error = "This email address already exists";
     } else {
-        $email     = mysqli_real_escape_string($connectDB, $_POST['email']);
-        $username  = mysqli_real_escape_string($connectDB, $_POST['username']);
-        $firstname = mysqli_real_escape_string($connectDB, $_POST['firstname']);
-        $lastname  = mysqli_real_escape_string($connectDB, $_POST['lastname']);
-        $delivery  = mysqli_real_escape_string($connectDB, $_POST['delivery_address']);
-        $type      = mysqli_real_escape_string($connectDB, $_POST['type']);
-        $password  = mysqli_real_escape_string($connectDB, $_POST['password']);
-        $password  = crypt($password, $_SERVER['key_encrypt']); #encrypt the password with a salt
-        $sql       = "INSERT INTO Customer(email, username, password, firstname, lastname, delivery_address, type) VALUES('$email', '$username', '$password', '$firstname', '$lastname', '$delivery', '$type')";
-        $res       = mysqli_query($connectDB, $sql);
+        $password = crypt($password, $_SERVER['key_encrypt']); #encrypt the password with a salt
+        $sql      = "INSERT INTO Customer(email, username, password, firstname, lastname, delivery_address, type) VALUES('$email', '$username', '$password', '$firstname', '$lastname', '$delivery', '$type')";
+        $res      = mysqli_query($connectDB, $sql);
 
         if ($res) {
             header("location: login.php");
         } else {
-            $error = "An account with this email/username already exists!";
+            $error = "An error occurred (please contact the admin if it persists)!";
         }
     }
 }
@@ -77,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")  {
                 <option value="2">Student</option>
                 <option value="3">Teacher</option>
             </select>
-            
+
             <button>Sign up</button>
         </form>
         <div class="error">
