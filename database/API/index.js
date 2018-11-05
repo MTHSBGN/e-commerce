@@ -15,7 +15,9 @@ app.use(function(req, res, next) {
 
 // API Routes
 const product = require('./routes/product');
+const description = require('./routes/description');
 
 app.use('/product', product);
+app.use('/description', description);
 
 app.listen(port);

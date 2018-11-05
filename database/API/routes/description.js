@@ -5,7 +5,7 @@ const router = express.Router();
 
 // Returns all the products of the database
 router.get('/', (req, res) => {
-  database.queryAll('Product', (err, rows) => {
+  database.queryAll('Description', (err, rows) => {
     if (err) throw err;
 
     res.send(rows);
@@ -13,8 +13,8 @@ router.get('/', (req, res) => {
 });
 
 // Returns the specific product matching productID
-router.get('/:productID', (req, res) => {
-  database.queryID('Product', req.params.productID, (err, rows) => {
+router.get('/:descriptionID', (req, res) => {
+  database.queryID('Description', req.params.descriptionID, (err, rows) => {
     if (err) throw err;
 
     res.send(rows);

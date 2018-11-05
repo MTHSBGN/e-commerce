@@ -7,4 +7,16 @@ connection = mysql.createConnection({
   database: 'group15'
 });
 
-module.exports = connection;
+function queryAll(table, callback) {
+  connection.query(`SELECT * FROM ${table}`, callback);
+}
+
+function queryID(table, ID, callback) {
+  table_id = table.toLowerCase() + '_id';
+  connection.query(
+    `SELECT * FROM ${table} WHERE ${table_id} = ${ID}`,
+    callback
+  );
+}
+
+module.exports = { queryAll: queryAll, queryID: queryID };
