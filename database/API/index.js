@@ -16,8 +16,10 @@ app.use(function(req, res, next) {
 // API Routes
 const product = require('./routes/product');
 const description = require('./routes/description');
+const category = require('./routes/category');
 
 app.use('/product', product);
 app.use('/description', description);
+app.use('/category', category);
 
 app.listen(port);

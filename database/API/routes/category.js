@@ -3,18 +3,18 @@ const database = require('../database');
 
 const router = express.Router();
 
-// Returns all the descriptions of the database
+// Returns all the categories of the database
 router.get('/', (req, res) => {
-  database.queryAll('Description', (err, rows) => {
+  database.queryAll('Category', (err, rows) => {
     if (err) throw err;
 
     res.send(rows);
   });
 });
 
-// Returns the specific description matching productID
-router.get('/:descriptionID', (req, res) => {
-  database.queryID('Description', req.params.descriptionID, (err, rows) => {
+// Returns the specific category matching productID
+router.get('/:categoryID', (req, res) => {
+  database.queryID('Category', req.params.categoryID, (err, rows) => {
     if (err) throw err;
 
     res.send(rows);
