@@ -17,9 +17,11 @@ app.use(function(req, res, next) {
 const product = require('./routes/product');
 const description = require('./routes/description');
 const category = require('./routes/category');
+const sku = require('./routes/sku');
 
 app.use('/product', product);
 app.use('/description', description);
 app.use('/category', category);
+app.use('/sku', sku);
 
 app.listen(port);

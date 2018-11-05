@@ -12,6 +12,10 @@ function queryAll(table, callback) {
 }
 
 function queryID(table, ID, callback) {
+  if (typeof ID === 'string') {
+    ID = `"${ID}"`;
+  }
+
   table_id = table.toLowerCase() + '_id';
   connection.query(
     `SELECT * FROM ${table} WHERE ${table_id} = ${ID}`,
