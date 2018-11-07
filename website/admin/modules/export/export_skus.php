@@ -15,7 +15,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
 include '../../../connectDB.php';
 include '../../admin_active_session.php';
 
-if (isset($_POST['submit'])) {
+// if (isset($_POST['submit']) && isset($_POST['start']) && isset($_POST['end'])) {
+//     header('Content-Type: application/csv');
+//     header('Content-Disposition: attachment; filename="sku_start_to_end.csv";');
+//     $out = fopen('php://output', 'w');
+//     $sql = "SELECT * FROM  INNER JOIN Variant ON Sku.sku_id = Variant.sku_id WHERE;";
+//     $res = mysqli_query($connectDB, $sql);
+//     $row = mysqli_fetch_assoc($res);
+//     //read first line to have header
+//     fputcsv($out, array_keys($row));
+//     fputcsv($out, $row);
+
+//     while ($row = mysqli_fetch_assoc($res)) {
+//         fputcsv($out, $row);
+//     }
+// }
+if (isset($_POST['submit']) && isset($_POST['stock'])) {
+    header('Content-Type: application/csv');
+    header('Content-Disposition: attachment; filename="sku_quantity.csv";');
+    $out       = fopen('php://output', 'w');
+    $available = mysqli_real_escape_string($connectDB, $_POST['stock']);
+    $sql       = "SELECT * FROM Sku INNER JOIN Variant ON Sku.sku_id = Variant.sku_id WHERE Sku.available < '$available';";
+    $res       = mysqli_query($connectDB, $sql);
+    $row       = mysqli_fetch_assoc($res);
+    //read first line to have header
+    fputcsv($out, array_keys($row));
+    fputcsv($out, $row);
+
+    while ($row = mysqli_fetch_assoc($res)) {
+        fputcsv($out, $row);
+    }
+
+} elseif (isset($_POST['submit'])) {
     header('Content-Type: application/csv');
     header('Content-Disposition: attachment; filename="sku.csv";');
     $out = fopen('php://output', 'w');
@@ -29,6 +60,4 @@ if (isset($_POST['submit'])) {
     while ($row = mysqli_fetch_assoc($res)) {
         fputcsv($out, $row);
     }
-    //TODO check the res and redirect if problems
-    //header('Location: ../../product.php');
 }

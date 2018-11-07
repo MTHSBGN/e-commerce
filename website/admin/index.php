@@ -94,6 +94,13 @@ include 'modules/product.php';
         <h2>Sku-variant export csv</h2>
         <input type="submit" name="submit" value="export">
       </form>
+
+      <form class="form-container" style="text-align:center" method="POST" action="./modules/export/export_skus.php">
+        <h2>Sku-variant where stock is above a certain quantity export csv</h2>
+        <input type="number" name="stock">
+        <input type="submit" name="submit" value="export">
+      </form>
+
     </div>
   </div>
 
