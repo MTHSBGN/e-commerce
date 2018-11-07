@@ -5,11 +5,14 @@ const router = express.Router();
 
 // Returns all the products of the database
 router.get('/', (req, res) => {
-  database.queryAll('Product', (err, rows) => {
-    if (err) throw err;
+  connection.query(
+    'SELECT * FROM Product INNER JOIN Sku ON Product.product_id=Sku.product_id INNER JOIN Variant ON Sku.sku_id=Variant.sku_id WHERE Variant.attribute = "images" GROUP BY Product.product_id',
+    (err, rows) => {
+      if (err) throw err;
 
-    res.send(rows);
-  });
+      res.send(rows);
+    }
+  );
 });
 
 // Returns the specific product matching productID
