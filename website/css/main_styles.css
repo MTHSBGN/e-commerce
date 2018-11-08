@@ -372,7 +372,6 @@ section
 	right: 0;
 	top: 120%;
 	margin: 0;
-	width: 100%;
 	background: #FFFFFF;
 	visibility: hidden;
 	opacity: 0;
@@ -383,6 +382,7 @@ section
 	-ms-transition: opacity 0.3s ease;
 	-o-transition: opacity 0.3s ease;
 	transition: all 0.3s ease;
+	align-items: stretch;
 }
 .account_selection li
 {

@@ -25,7 +25,7 @@ function accountState($active)
     } else {
         $output .= '<li class="account">';
         $output .= '<a href="#">';
-        $output .= 'Account';
+        $output .= 'Votre compte';
         $output .= '</a>';
 
         $output .= '<ul class="account_selection">';
