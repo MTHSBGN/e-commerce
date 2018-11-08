@@ -25,5 +25,11 @@ if (isset($_POST['submit'])) {
     INSERT INTO Product(description_id, category_id, name) VALUES(LAST_INSERT_ID(), '$cat', '$name')";
     $res = mysqli_multi_query($connectDB, $sql);
     //TODO check the res and redirect if problems
-    header('Location: ../../product.php');
+    $response = 0;
+    // Insertion is a success
+    if ($res) {
+        $response = 1;
+    }
+    
+    header('Location: ../../product.php?result=' . $response);
 }

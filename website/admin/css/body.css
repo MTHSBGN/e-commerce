@@ -1,5 +1,17 @@
-body{
+body {
     background-color: #F6F6F6;
+}
+
+p {
+    font-size: 1.5em
+}
+
+h1 {
+    padding: 20px 0;
+    font-size: 2.5em;
+    font-weight: 300;
+    text-align: center;
+    color: #fff;
 }
 
 h2 {
@@ -13,18 +25,20 @@ h2 {
 .admin-tiles {
     display: block;
     background-color: #E8E8E8;
-    color:#333333;
+    color: #333333;
     margin: 40px;
 
 }
 
-.admin-tiles h1,h2,h3 {
+.admin-tiles h1,
+h2,
+h3 {
     text-transform: uppercase;
     text-decoration: underline;
     border-bottom: none;
     padding-left: 15px;
     margin-bottom: 0;
-    padding-bottom: 0; 
+    padding-bottom: 0;
 }
 
 .admin-tiles-content {
@@ -37,7 +51,7 @@ h2 {
 }
 
 .admin-tiles-content-right {
-    padding-right: 10px; 
+    padding-right: 10px;
     font-style: oblique;
     text-align: right;
 }
@@ -47,5 +61,5 @@ h2 {
 }
 
 .red-alert {
-    color:#FC6042
+    color: #FC6042
 }

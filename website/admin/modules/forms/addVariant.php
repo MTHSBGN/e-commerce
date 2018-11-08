@@ -23,5 +23,11 @@ if (isset($_POST['submit'])) {
     $sql = "INSERT INTO Variant(sku_id, attribute, value) VALUES('$sku_id', '$attribute', '$value');";
     $res = mysqli_multi_query($connectDB, $sql);
     //TODO check the res and redirect if problems
-    header('Location: ../../product.php');
+    $response = 0;
+    // Insertion is a success
+    if ($res) {
+        $response = 1;
+    }
+    
+    header('Location: ../../product.php?result=' . $response);
 }

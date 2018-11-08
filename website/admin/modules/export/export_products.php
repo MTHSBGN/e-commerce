@@ -19,7 +19,9 @@ if (isset($_POST['submit'])) {
     header('Content-Type: application/csv');
     header('Content-Disposition: attachment; filename="products.csv";');
     $out = fopen('php://output', 'w');
-    $sql = "SELECT * FROM Product INNER JOIN Sku ON Product.product_id = Sku.product_id;";
+    $sql = "SELECT Product.name as product_name, Category.name as category_name, Sku.sku_id, Sku.price, Sku.available, Sku.sold
+    FROM Product INNER JOIN Sku ON Product.product_id = Sku.product_id
+    INNER JOIN Category ON Product.category_id = Category.category_id;";
     $res = mysqli_query($connectDB, $sql);
     $row = mysqli_fetch_assoc($res);
     //read first line to have header

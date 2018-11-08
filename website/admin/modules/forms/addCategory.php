@@ -23,5 +23,11 @@ if (isset($_POST['submit'])) {
     INSERT INTO Category(description_id, name) VALUES(LAST_INSERT_ID(), '$cat_name')";
     $res = mysqli_multi_query($connectDB, $sql);
     //TODO check the res and redirect if problems
-    header('Location: ../../category.php');
+    $response = 0;
+    // Insertion is a success
+    if ($res) {
+        $response = 1;
+    }
+
+    header('Location: ../../category.php?result=' . $response);
 }

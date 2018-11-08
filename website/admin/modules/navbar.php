@@ -5,13 +5,13 @@
   </div>
 
   <ul class="list-unstyled components">
-    <li class="active">
+    <li id="home" class="active">
     <a href="./index.php">Home</a>
     </li>
-    <li>
+    <li id="product">
       <a href="./product.php">Product</a>
     </li>
-    <li>
+    <li id="category">
       <a href="./category.php">Category</a>
     </li>
   </ul>

@@ -7,20 +7,10 @@
   transition: opacity 1s;
   -webkit-transition: opacity 1s;
 }
- p {
-   font-size: 1.5em
- }
-h1 {
-  background: #3399cc;
-  padding: 20px 0;
-  font-size: 2.5em;
-  font-weight: 300;
-  text-align: center;
-  color: #fff;
-}
+
 
 .form-container h1 {
-  background: #3399cc;
+  background: #0b7680;
   padding: 20px 0;
   font-size: 140%;
   font-weight: 300;
@@ -47,17 +37,13 @@ h1 {
   color: #555;
 }
 
-#pass-form select {
-  width: 100%;
-}
-
 #pass-form textarea {
   height: 100px;
 }
 
 #pass-form input[type="submit"] {
   width: 100%;
-  background: #3399cc;
+  background: #0b7680;
   border: 0;
   padding: 4%;
   font-family: 'Open Sans', sans-serif;
@@ -69,7 +55,7 @@ h1 {
 }
 
 #pass-form input[type="submit"]:hover {
-  background: #2288bb;
+  background: #0b7680;
 }
 
 #btn-logout {

@@ -2,11 +2,35 @@
 <?php
 // This file is used to display the admin panel
 include 'admin_active_session.php';
-include 'modules/product.php';
+include '../connectDB.php';
+
+function get_users()
+{
+    $sql = "SELECT * FROM Customer;";
+    $res = mysqli_query($GLOBALS['connectDB'], $sql);
+    if (!$res) {
+        echo ("Error description: " . mysqli_error($con));
+    }
+    echo mysqli_num_rows($res);
+}
+
+function get_num_orders()
+{
+    $sql = "SELECT * FROM Product_order;";
+    $res = mysqli_query($GLOBALS['connectDB'], $sql);
+    if (!$res) {
+        echo ("Error description: " . mysqli_error($con));
+    }
+    echo mysqli_num_rows($res);
+}
+
 ?>
 
 <html>
-<?php include './modules/meta.php'?>
+<?php 
+$_GET['title']='home';
+include './modules/meta.php';
+?>
 
 <body>
   <?php include './modules/header.php'?>
@@ -27,7 +51,9 @@ include 'modules/product.php';
               <p>Number</p>
             </div>
             <div class="admin-tiles-content-right">
-              <p>200</p>
+              <p>
+                <?php get_users()?>
+              </p>
             </div>
           </div>
         </div>
@@ -78,7 +104,9 @@ include 'modules/product.php';
               <p>Number</p>
             </div>
             <div class="admin-tiles-content-right">
-              <p>25</p>
+              <p>
+                <?php get_num_orders()?>
+              </p>
             </div>
           </div>
         </div>
@@ -87,17 +115,31 @@ include 'modules/product.php';
 
       <form class="form-container" style="text-align:center" method="POST" action="./modules/export/export_products.php">
         <h2>Products export csv</h2>
-        <input type="submit" name="submit" value="export">
-      </form>
-
-      <form class="form-container" style="text-align:center" method="POST" action="./modules/export/export_skus.php">
-        <h2>Sku-variant export csv</h2>
+        <p> This export will create a csv file (standard file that does not depend of microsoft suite).</p>
+        <p> This export contains several fields which are:</p>
+        <ul>
+          <li> Product name</li>
+          <li> Category name</li>
+          <li> The stock keeping unit of the product</li>
+          <li> Unit price of the product </li>
+          <li> Quantity available </li>
+          <li> Quantity sold </li>
+        </ul>
         <input type="submit" name="submit" value="export">
       </form>
 
       <form class="form-container" style="text-align:center" method="POST" action="./modules/export/export_skus.php">
         <h2>Sku-variant where stock is above a certain quantity export csv</h2>
-        <input type="number" name="stock">
+        <p> This export will create a csv file (standard file that does not depend of microsoft suite).</p>
+        <p> This export contains several fields which are:</p>
+        <ul>
+          <li> The stock keeping unit of the product</li>
+          <li> Unit price of the product </li>
+          <li> Quantity available </li>
+          <li> Quantity sold </li>
+          <li> Attributes and values associated to that sku </li>
+        </ul>
+        <input type="number" name="stock" value="0" min="0">
         <input type="submit" name="submit" value="export">
       </form>
 
@@ -109,20 +151,13 @@ include 'modules/product.php';
     <p> University of Liège </p>
   </footer>
 </body>
+
 <script>
-  // This function allows to set the visibility of an element
-  // If the element is already visible then it will be turned to none
-  // otherwise an element which is set to none will be turned to block.
-  // elementId: It is the id given to a element
-  function setVisibility(elementId) {
-    if (document.getElementById(elementId).style.display == 'none') {
-      document.getElementById(elementId).style.display = 'block';
-      document.getElementById('typeBtn').innerHTML = 'Hide';
-    } else {
-      document.getElementById(elementId).style.display = 'none';
-      document.getElementById('typeBtn').innerHTML = 'Show';
-    }
-  }
+  //remove the active class from all items, if there is any
+  $('nav li').removeClass('active');
+
+  //finally, add the active class to the current item
+  $('#' + document.title).addClass('active');
 </script>
 
 </html>

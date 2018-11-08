@@ -33,24 +33,15 @@ include '../../admin_active_session.php';
 if (isset($_POST['submit']) && isset($_POST['stock'])) {
     header('Content-Type: application/csv');
     header('Content-Disposition: attachment; filename="sku_quantity.csv";');
-    $out       = fopen('php://output', 'w');
-    $available = mysqli_real_escape_string($connectDB, $_POST['stock']);
-    $sql       = "SELECT * FROM Sku INNER JOIN Variant ON Sku.sku_id = Variant.sku_id WHERE Sku.available < '$available';";
-    $res       = mysqli_query($connectDB, $sql);
-    $row       = mysqli_fetch_assoc($res);
-    //read first line to have header
-    fputcsv($out, array_keys($row));
-    fputcsv($out, $row);
-
-    while ($row = mysqli_fetch_assoc($res)) {
-        fputcsv($out, $row);
-    }
-
-} elseif (isset($_POST['submit'])) {
-    header('Content-Type: application/csv');
-    header('Content-Disposition: attachment; filename="sku.csv";');
     $out = fopen('php://output', 'w');
-    $sql = "SELECT * FROM Sku INNER JOIN Variant ON Sku.sku_id = Variant.sku_id;";
+    $available = $_POST['stock'];
+    if ($available > 0) {
+        $sql = "SELECT Sku.sku_id, Sku.price, Sku.available, Sku.sold, Variant.attribute, Variant.value
+        FROM Sku INNER JOIN Variant ON Sku.sku_id = Variant.sku_id WHERE Sku.available < '$available';";
+    } else {
+        $sql = "SELECT Sku.sku_id, Sku.price, Sku.available, Sku.sold, Variant.attribute, Variant.value 
+        FROM Sku INNER JOIN Variant ON Sku.sku_id = Variant.sku_id;";
+    }
     $res = mysqli_query($connectDB, $sql);
     $row = mysqli_fetch_assoc($res);
     //read first line to have header
@@ -60,4 +51,5 @@ if (isset($_POST['submit']) && isset($_POST['stock'])) {
     while ($row = mysqli_fetch_assoc($res)) {
         fputcsv($out, $row);
     }
+
 }
