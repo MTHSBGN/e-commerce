@@ -23,4 +23,4 @@ function queryID(table, ID, callback) {
   );
 }
 
-module.exports = { queryAll: queryAll, queryID: queryID };
+module.exports = { queryAll: queryAll, queryID: queryID, connection: connection };
