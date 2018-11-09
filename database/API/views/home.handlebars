@@ -1,5 +1,11 @@
-{{!-- {{#each products}}
-
-<h1>{{name}}</h1>
-
-{{/each}} --}}
+<div id="cards-container">
+    {{#each products}}
+    <div class="card">
+        <img src="images/products/{{image}}">
+        <div class="card-info">
+            <p>{{name}}</p>
+            <p>{{price}} €</p>
+        </div>
+    </div>
+    {{/each}}
+</div>
