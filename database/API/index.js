@@ -1,11 +1,15 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
+const bodyParser = require('body-parser');
 
 const app = express();
 const port = 3000;
 
 // Static files
 app.use(express.static('public'));
+
+// Parsing body of requests
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // View engine
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
@@ -21,10 +25,12 @@ app.use(function(req, res, next) {
   next();
 });
 
-// // API Routes
+// API Routes
 const home = require('./routes/home');
+const account = require('./routes/account');
 
 app.use('/', home);
+app.use('/', account);
 
 // const product = require('./routes/product');
 // const description = require('./routes/description');
