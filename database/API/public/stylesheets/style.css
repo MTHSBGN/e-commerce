@@ -25,9 +25,17 @@ header {
   margin: 0px 20px;
 }
 
-a {
+#menu a {
   color: white;
   text-decoration: none;
+}
+
+#menu a:visited {
+  color: white;
+}
+
+#menu a:hover {
+  text-decoration: underline;
 }
 
 #cards-container {

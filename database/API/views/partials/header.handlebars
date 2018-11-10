@@ -1,0 +1,17 @@
+<header>
+  <a href="/">
+    <img id="logo" src="http://localhost:3000/images/logo-white.svg" alt="">
+  </a>
+  <nav id="menu">
+    <ul>
+      <li>
+        {{#if login}}
+        <a href="#">Votre compte</a>
+        {{else}}
+        <a href="/login">Se connecter</a>
+        {{/if}}
+      </li>
+      <li><a href="#">Panier</a></li>
+    </ul>
+  </nav>
+</header>

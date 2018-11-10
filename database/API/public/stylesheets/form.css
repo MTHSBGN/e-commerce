@@ -103,13 +103,13 @@ select::focus {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4);
 }
 
-a {
+#form-card a {
   text-decoration: none;
   color: #0b7680;
 }
 
-a:hover {
-  color: #004a99;
+#form-card a:hover {
+  color: #0b7680;
 }
 
 #register-name {

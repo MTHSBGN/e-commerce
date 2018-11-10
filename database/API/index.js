@@ -3,6 +3,8 @@ const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const morgan = require('morgan');
+const uuid = require('uuid');
+const FileStore = require('session-file-store')(session);
 
 const app = express();
 const port = 3000;
@@ -14,7 +16,18 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Session management
-// app.use(session({ secret: 'secret' }));
+app.use(
+  session({
+    genid: req => {
+      return uuid();
+    },
+    cookie: { expires: new Date(253402300799999) },
+    secret: 'Secret', // TODO Change secret with ENV Var
+    resave: false,
+    saveUninitialized: true,
+    store: new FileStore()
+  })
+);
 
 // Logging
 app.use(morgan('combined'));
@@ -36,8 +49,10 @@ app.use(function(req, res, next) {
 // API Routes
 const home = require('./routes/home');
 const account = require('./routes/account');
+const product = require('./routes/product');
 
 app.use('/', home);
 app.use('/', account);
+app.use('/product', product);
 
 app.listen(port);

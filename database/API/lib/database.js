@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+const fs = require('fs');
 
 connection = mysql.createConnection({
   host: 'localhost',
@@ -7,7 +8,11 @@ connection = mysql.createConnection({
   database: 'group15'
 });
 
-function query(query) {
+function query(query, filename) {
+  if (filename && query === '') {
+    query = fs.readFileSync(filename, 'utf-8').trim();
+  }
+
   return new Promise((resolve, reject) => {
     connection.query(query, (err, rows) => {
       if (err) {

@@ -22,6 +22,7 @@ router.post('/login', (req, res) => {
         out.errorMessage = 'This email does not exist';
         res.render('login', out);
       } else if (credentials.compare(req.body.password, rows[0].password)) {
+        req.session.login = true;
         res.redirect('/');
       } else {
         out.errorMessage = 'Invalid password';
@@ -48,8 +49,9 @@ router.post('/signup', (req, res) => {
       let lastname = req.body.lastname;
       let delivery_address = req.body.delivery_address;
       let type = req.body.type;
+      let cookie_id = req.sessionID;
 
-      values = `(${client_id}, "${email}", "${username}", "${password}", "${firstname}", "${lastname}", "${delivery_address}", "${type}")`;
+      values = `(${client_id}, "${email}", "${username}", "${password}", "${firstname}", "${lastname}", "${delivery_address}", "${type}", "${cookie_id}")`;
 
       return query(`INSERT INTO Customer VALUES ${values}`);
     })

@@ -1,11 +1,14 @@
+{{> header @root}}
 <div id="cards-container">
     {{#each products}}
-    <div class="card">
-        <img src="images/products/{{main_image}}">
-        <div class="card-info">
-            <p>{{name}}</p>
-            <p>{{price}} €</p>
+    <a href="/product/{{product_id}}">
+        <div class="card">
+            <img src="images/products/{{main_image}}">
+            <div class="card-info">
+                <p>{{name}}</p>
+                <p>{{price}} €</p>
+            </div>
         </div>
-    </div>
+    </a>
     {{/each}}
 </div>

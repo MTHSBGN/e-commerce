@@ -8,7 +8,8 @@ router.get('/', function(req, res) {
     'SELECT DISTINCT Product.product_id, Product.name, Product.main_image, Sku.price FROM Product INNER JOIN Sku ON Product.product_id = Sku.product_id'
   ).then(rows => {
     res.render('home', {
-      products: rows
+      products: rows,
+      login: req.session.login
     });
   });
 });
