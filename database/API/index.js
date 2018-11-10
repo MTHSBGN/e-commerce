@@ -2,6 +2,7 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const morgan = require('morgan');
 
 const app = express();
 const port = 3000;
@@ -14,6 +15,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Session management
 // app.use(session({ secret: 'secret' }));
+
+// Logging
+app.use(morgan('combined'));
 
 // View engine
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
