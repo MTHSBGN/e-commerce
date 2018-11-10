@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <?php
-// This file is used to display the admin panel
-
+/* This file generates the product page that give the possibility to add new
+products inside the e-commerce database.
+ */
 include 'admin_active_session.php';
 include '../connectDB.php';
 
+/*
+This function create a <select>
+tag option category for a form and put the right id corresponding at the given class
+as value parameter.
+ */
 function list_category()
 {
     $sql = "SELECT category_id, name FROM Category;";
@@ -14,7 +20,7 @@ function list_category()
         echo ("Error description: " . mysqli_error($con));
     }
 
-    $list = '<select name="cat" required>';
+    $list = '<select name="category" required>';
     $list .= '<option disabled selected value> -- select a product -- </option>';
     /* fetch associative array */
     while ($row = mysqli_fetch_assoc($res)) {
@@ -24,6 +30,11 @@ function list_category()
     echo $list;
 }
 
+/*
+This function create a <select>
+tag option sku_id for a form and put the right id corresponding at the given class
+as value parameter.
+ */
 function list_sku_id()
 {
     $sql = "SELECT sku_id FROM Sku;";
@@ -41,6 +52,11 @@ function list_sku_id()
     echo $list;
 }
 
+/*
+This function create a <select>
+tag option product for a form and put the right id corresponding at the given class
+as value parameter.
+ */
 function list_product()
 {
     $sql = "SELECT product_id, name FROM Product;";
@@ -123,6 +139,7 @@ include './modules/meta.php';
 </body>
 
 <?php
+//generate alert box after insertion
 if (isset($_GET["result"])) {
     $res = $_GET["result"];
     if ($res) {

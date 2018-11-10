@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
     header('HTTP/1.0 403 Forbidden', true, 403);
 
     /* choose the appropriate page to redirect users */
-    die(header('location: ../../errors/404.html'));
+    die(header('Location: ../../../errors/403.html'));
 
 }
 // Includes to connect to the DB and check the user access
@@ -21,8 +21,8 @@ if (isset($_POST['submit'])) {
     $price      = mysqli_real_escape_string($connectDB, $_POST['price']);
     $available  = mysqli_real_escape_string($connectDB, $_POST['quantity']);
 
-    $sql = "INSERT INTO Sku(sku_id, product_id, price, available) VALUES('$sku_id', '$product_id', '$price', '$available');";
-    $res = mysqli_multi_query($connectDB, $sql);
+    $sql = "INSERT INTO Sku(sku_id, product_id, price, available) VALUES('$sku_id', '$product_id', '$price', '$available')";
+    $res = mysqli_query($connectDB, $sql);
     $response = 0;
     // Insertion is a success
     if ($res) {

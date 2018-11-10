@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 03, 2018 at 05:27 PM
+-- Generation Time: Nov 10, 2018 at 03:51 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.0.27
 
@@ -43,7 +43,22 @@ INSERT INTO `Category` (`category_id`, `description_id`, `name`) VALUES
 (2, 2, 'books'),
 (3, 3, 'drink'),
 (4, 4, 'food'),
-(5, 5, 'goodies');
+(5, 5, 'goodies'),
+(6, 28, 'others');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Client_order`
+--
+
+CREATE TABLE `Client_order` (
+  `order_id` int(11) NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `date` datetime NOT NULL,
+  `total_price` float NOT NULL,
+  `ship_address` varchar(256) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -112,7 +127,8 @@ INSERT INTO `Description` (`description_id`, `french`, `english`) VALUES
 (24, 'Bouteille de vin brut “l’Insoumise', 'Bouteille de vin brut “l’Insoumise'),
 (25, 'champange laurent perrier', 'champange laurent perrier'),
 (26, 'bonbon menthe', 'bonbon menthe'),
-(27, 'règlette chocolat', 'règlette chocolat');
+(27, 'règlette chocolat', 'règlette chocolat'),
+(28, 'others', 'others');
 
 -- --------------------------------------------------------
 
@@ -172,20 +188,6 @@ INSERT INTO `Product` (`product_id`, `description_id`, `category_id`, `name`) VA
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Product_order`
---
-
-CREATE TABLE `Product_order` (
-  `order_id` int(11) NOT NULL,
-  `client_id` int(11) NOT NULL,
-  `date` date NOT NULL,
-  `total_price` float NOT NULL,
-  `ship_address` varchar(256) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `Sku`
 --
 
@@ -202,8 +204,8 @@ CREATE TABLE `Sku` (
 --
 
 INSERT INTO `Sku` (`sku_id`, `product_id`, `price`, `available`, `sold`) VALUES
-('BADGE_HEC', 6, 0.3, 5, 0),
-('BAG_HEC', 7, 3, 5, 0),
+('BADGE_HEC', 6, 0.3, 5, 2),
+('BAG_HEC', 7, 3, 5, 2),
 ('BIC_HEC_BLUE', 13, 0.6, 0, 0),
 ('BIC_HEC_GREEN', 13, 0.6, 3, 0),
 ('BIC_HEC_PURPLE', 13, 0.6, 3, 0),
@@ -290,7 +292,7 @@ INSERT INTO `Variant` (`variant_id`, `sku_id`, `attribute`, `value`) VALUES
 (35, 'NOTE_HEC_A5', 'images', '{\"images\":[\"note_hec_a5_img_1.png\", \"note_hec_a5_img_2.png\"]}'),
 (36, 'PINS_HEC', 'images', '{\"images\":[\"pins_hec_img_1.png\", \"pins_hec_img_2.png\"]}'),
 (37, 'USB_KEY_HEC', 'images', '{\"images\":[\"usb_hec_img_1.png\", \"usb_hec_img_2.png\"]}'),
-(38, 'WEIGHT_HEC', 'images', '{\"images\":[\"wheight_hec_img_1.png\", \"wheight_hec_img_2.png\", \"wheight_hec_img_3.png\"]}'),
+(38, 'WEIGHT_HEC', 'images', '{\"images\":[\"weight_hec_img_1.png\", \"weight_hec_img_2.png\", \"weight_hec_img_3.png\"]}'),
 (39, 'WINE_HM_2012', 'images', '{\"images\":[\"wine_hm_2012_img_1.jpg\", \"wine_hm_2012_img_2.jpg\", \"wine_hm_2012_img_3.jpg\"]}'),
 (40, 'WINE_INSOUMISE', 'images', '{\"images\":[\"wine_insoumise_img_1.jpg\", \"wine_insoumise_img_2.jpg\"]}');
 
@@ -304,6 +306,13 @@ INSERT INTO `Variant` (`variant_id`, `sku_id`, `attribute`, `value`) VALUES
 ALTER TABLE `Category`
   ADD PRIMARY KEY (`category_id`),
   ADD KEY `description_id` (`description_id`);
+
+--
+-- Indexes for table `Client_order`
+--
+ALTER TABLE `Client_order`
+  ADD PRIMARY KEY (`order_id`),
+  ADD KEY `client_id` (`client_id`) USING BTREE;
 
 --
 -- Indexes for table `Customer`
@@ -335,13 +344,6 @@ ALTER TABLE `Product`
   ADD KEY `category_id` (`category_id`);
 
 --
--- Indexes for table `Product_order`
---
-ALTER TABLE `Product_order`
-  ADD PRIMARY KEY (`order_id`),
-  ADD UNIQUE KEY `client_id` (`client_id`);
-
---
 -- Indexes for table `Sku`
 --
 ALTER TABLE `Sku`
@@ -363,31 +365,31 @@ ALTER TABLE `Variant`
 -- AUTO_INCREMENT for table `Category`
 --
 ALTER TABLE `Category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `Client_order`
+--
+ALTER TABLE `Client_order`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `Customer`
 --
 ALTER TABLE `Customer`
-  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `Description`
 --
 ALTER TABLE `Description`
-  MODIFY `description_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `description_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `Product`
 --
 ALTER TABLE `Product`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
-
---
--- AUTO_INCREMENT for table `Product_order`
---
-ALTER TABLE `Product_order`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `Variant`
@@ -406,10 +408,16 @@ ALTER TABLE `Category`
   ADD CONSTRAINT `Category_ibfk_1` FOREIGN KEY (`description_id`) REFERENCES `Description` (`description_id`);
 
 --
+-- Constraints for table `Client_order`
+--
+ALTER TABLE `Client_order`
+  ADD CONSTRAINT `Client_order_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `Customer` (`client_id`);
+
+--
 -- Constraints for table `Order_details`
 --
 ALTER TABLE `Order_details`
-  ADD CONSTRAINT `Order_details_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `Product_order` (`order_id`),
+  ADD CONSTRAINT `Order_details_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `Client_order` (`order_id`),
   ADD CONSTRAINT `Order_details_ibfk_2` FOREIGN KEY (`sku_id`) REFERENCES `Sku` (`sku_id`);
 
 --
@@ -418,12 +426,6 @@ ALTER TABLE `Order_details`
 ALTER TABLE `Product`
   ADD CONSTRAINT `Product_ibfk_1` FOREIGN KEY (`description_id`) REFERENCES `Description` (`description_id`),
   ADD CONSTRAINT `Product_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `Category` (`category_id`);
-
---
--- Constraints for table `Product_order`
---
-ALTER TABLE `Product_order`
-  ADD CONSTRAINT `Product_order_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `Customer` (`client_id`);
 
 --
 -- Constraints for table `Sku`

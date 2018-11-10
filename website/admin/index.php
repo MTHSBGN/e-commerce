@@ -14,9 +14,31 @@ function get_users()
     echo mysqli_num_rows($res);
 }
 
+function get_products_sold()
+{
+    $sql = "SELECT SUM(quantity) as tot FROM Order_details";
+    $res = mysqli_query($GLOBALS['connectDB'], $sql);
+    if (!$res) {
+        echo ("Error description: " . mysqli_error($con));
+    }
+    $total = mysqli_fetch_array($res);
+    echo $total['tot'];
+}
+
+function get_total_revenue()
+{
+    $sql = "SELECT SUM(total_price) as revenue FROM Client_order";
+    $res = mysqli_query($GLOBALS['connectDB'], $sql);
+    if (!$res) {
+        echo ("Error description: " . mysqli_error($con));
+    }
+    $total = mysqli_fetch_array($res);
+    echo round($total['revenue'], 2);
+}
+
 function get_num_orders()
 {
-    $sql = "SELECT * FROM Product_order;";
+    $sql = "SELECT * FROM Client_order;";
     $res = mysqli_query($GLOBALS['connectDB'], $sql);
     if (!$res) {
         echo ("Error description: " . mysqli_error($con));
@@ -27,8 +49,8 @@ function get_num_orders()
 ?>
 
 <html>
-<?php 
-$_GET['title']='home';
+<?php
+$_GET['title'] = 'home';
 include './modules/meta.php';
 ?>
 
@@ -66,7 +88,9 @@ include './modules/meta.php';
               <p>Sold</p>
             </div>
             <div class="admin-tiles-content-right">
-              <p>20</p>
+              <p>
+                <?php get_products_sold()?>
+              </p>
             </div>
 
           </div>
@@ -77,10 +101,12 @@ include './modules/meta.php';
           <div class="admin-tiles-content">
 
             <div class="admin-tiles-content-left">
-              <p>Benefice</p>
+              <p>Total</p>
             </div>
             <div class="admin-tiles-content-right">
-              <p class="green-alert">200</p>
+              <p class="green-alert">
+                <?php get_total_revenue()?>
+              </p>
             </div>
           </div>
 
