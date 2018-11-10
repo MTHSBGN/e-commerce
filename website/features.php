@@ -1,6 +1,9 @@
 <?php
+/*
+Generate the navigation depending on the user status
+*/
 session_start();
-$ste = false;
+$state = false;
 # the user is not active anymore
 if (!isset($_SESSION['login_user'])) {
     $state = false;
