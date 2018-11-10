@@ -9,6 +9,11 @@
 - [x] About information page
 - [x] Admin page
 
+# Additional features added
+- [x] Admin panel: Export csv files with specific criteria
+- [x] Admin panel: Product manager to insert new elements
+- [x] Admin panel: Tiles that summarize important information about the e-commerce website
+
 # Database tables minimal requirements
 - [x] `Product`: This table must contain the product id, name, image, price, and quantity in stock (spread into several tables)
 - [x] `Customer`: This table must contain the customer id, username, password, forename, last name and mail
