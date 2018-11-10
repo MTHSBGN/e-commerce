@@ -1,5 +1,5 @@
 const express = require('express');
-const connection = require('../database');
+const query = require('../lib/database');
 const credentials = require('../lib/credentials');
 
 const router = express.Router();
@@ -9,28 +9,28 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-  email = req.body.email;
+  let email = req.body.email;
 
-  connection.query(
-    `SELECT * FROM Customer WHERE Customer.email = "${email}"`,
-    (err, rows) => {
-      if (err) throw err;
+  query(`SELECT * FROM Customer WHERE Customer.email = "${email}"`)
+    .then(rows => {
+      out = {
+        error: true,
+        errorMessage: ''
+      };
 
       if (rows.length == 0) {
-        res.render('login', {
-          error: true,
-          errorMessage: 'This email does not exist'
-        });
+        out.errorMessage = 'This email does not exist';
+        res.render('login', out);
       } else if (credentials.compare(req.body.password, rows[0].password)) {
         res.redirect('/');
       } else {
-        res.render('login', {
-          error: true,
-          errorMessage: 'Invalid password'
-        });
+        out.errorMessage = 'Invalid password';
+        res.render('login', out);
       }
-    }
-  );
+    })
+    .catch(err => {
+      console.log(err);
+    });
 });
 
 router.get('/signup', (req, res) => {
@@ -38,44 +38,43 @@ router.get('/signup', (req, res) => {
 });
 
 router.post('/signup', (req, res) => {
-  connection.query('SELECT Customer.client_id FROM Customer', (err, rows) => {
-    if (err) throw err;
+  query('SELECT Customer.client_id FROM Customer')
+    .then(rows => {
+      let client_id = firstFreeId(rows);
+      let email = req.body.email;
+      let username = req.body.username;
+      let password = credentials.hash(req.body.password);
+      let firstname = req.body.firstname;
+      let lastname = req.body.lastname;
+      let delivery_address = req.body.delivery_address;
+      let type = req.body.type;
 
-    let client_id = 0;
-    let last = 0;
+      values = `(${client_id}, "${email}", "${username}", "${password}", "${firstname}", "${lastname}", "${delivery_address}", "${type}")`;
 
-    for (row of rows) {
-      console.log(row);
-      if (last + 1 != row.client_id) {
-        client_id = last + 1;
-      }
-
-      last = row.client_id;
-    }
-
-    email = req.body.email;
-    username = req.body.username;
-
-    // Hash password
-    password = credentials.hash(req.body.password);
-
-    firstname = req.body.firstname;
-    lastname = req.body.lastname;
-    delivery_address = req.body.delivery_address;
-    type = req.body.type;
-
-    // TODO Cookie ID
-
-    values = `(${client_id}, "${email}", "${username}", "${password}", "${firstname}", "${lastname}", "${delivery_address}", "${type}")`;
-
-    connection.query(`INSERT INTO Customer VALUES ${values}`, (err, rows) => {
-      if (err) throw err;
-
+      return query(`INSERT INTO Customer VALUES ${values}`);
+    })
+    .then(() => {
       res.redirect('/');
+    })
+    .catch(err => {
+      console.log(err);
     });
-  });
 });
 
 module.exports = router;
 
 // TODO Check multiple emails / USERNAME
+
+function firstFreeId(rows) {
+  let last = 0;
+
+  for (row of rows) {
+    if (last + 1 != row.client_id) {
+      break;
+    }
+
+    last = row.client_id;
+  }
+
+  return last + 1;
+}
