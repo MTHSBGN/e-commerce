@@ -38,26 +38,41 @@ router.get('/signup', (req, res) => {
 });
 
 router.post('/signup', (req, res) => {
-  client_id = 12; // TODO Select first empty ID
-  email = req.body.email;
-  username = req.body.username;
-
-  // Hash password
-  password = credentials.hash(req.body.password);
-
-  firstname = req.body.firstname;
-  lastname = req.body.lastname;
-  delivery_address = req.body.delivery_address;
-  type = req.body.type;
-
-  // TODO Cookie ID
-
-  values = `(${client_id}, "${email}", "${username}", "${password}", "${firstname}", "${lastname}", "${delivery_address}", "${type}")`;
-
-  connection.query(`INSERT INTO Customer VALUES ${values}`, (err, rows) => {
+  connection.query('SELECT Customer.client_id FROM Customer', (err, rows) => {
     if (err) throw err;
 
-    res.redirect('/');
+    let client_id = 0;
+    let last = 0;
+
+    for (row of rows) {
+      console.log(row);
+      if (last + 1 != row.client_id) {
+        client_id = last + 1;
+      }
+
+      last = row.client_id;
+    }
+
+    email = req.body.email;
+    username = req.body.username;
+
+    // Hash password
+    password = credentials.hash(req.body.password);
+
+    firstname = req.body.firstname;
+    lastname = req.body.lastname;
+    delivery_address = req.body.delivery_address;
+    type = req.body.type;
+
+    // TODO Cookie ID
+
+    values = `(${client_id}, "${email}", "${username}", "${password}", "${firstname}", "${lastname}", "${delivery_address}", "${type}")`;
+
+    connection.query(`INSERT INTO Customer VALUES ${values}`, (err, rows) => {
+      if (err) throw err;
+
+      res.redirect('/');
+    });
   });
 });
 
