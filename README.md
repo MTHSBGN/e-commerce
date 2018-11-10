@@ -5,7 +5,7 @@
 - [x] Login page
 - [ ] Product catalogue page
 - [ ] Basket validation page
-- [ ] Payment page
+- [x] Payment page
 - [x] About information page
 - [x] Admin page
 
