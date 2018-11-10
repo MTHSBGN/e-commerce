@@ -1,6 +1,7 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
+const session = require('express-session');
 
 const app = express();
 const port = 3000;
@@ -10,6 +11,9 @@ app.use(express.static('public'));
 
 // Parsing body of requests
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Session management
+// app.use(session({ secret: 'secret' }));
 
 // View engine
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
@@ -31,17 +35,5 @@ const account = require('./routes/account');
 
 app.use('/', home);
 app.use('/', account);
-
-// const product = require('./routes/product');
-// const description = require('./routes/description');
-// const category = require('./routes/category');
-// const sku = require('./routes/sku');
-// const variant = require('./routes/variant');
-
-// app.use('/product', product);
-// app.use('/description', description);
-// app.use('/category', category);
-// app.use('/sku', sku);
-// app.use('/variant', variant);
 
 app.listen(port);

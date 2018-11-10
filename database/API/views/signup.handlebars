@@ -1,0 +1,43 @@
+<div id="form-card">
+    <h2>Sign up</h2>
+    <form class="boxcon" name="registration" method="post" action="/signup">
+        <div id="register-name">
+            <div class="form-input">
+                <input id="register-firstname" type="text" name="firstname" required>
+                <label for="register-firstname">First name</label>
+            </div>
+            <div class="form-input">
+                <input id="register-lastname" type="text" name="lastname" required>
+                <label for="register-lastname">Last name</label>
+            </div>
+        </div>
+        <div class="form-input">
+            <input id="register-username" type="text" name="username" required>
+            <label for="register-username">Username</label>
+        </div>
+        <div class="form-input">
+            <input id="register-email" type="text" name="email" required>
+            <label for="register-email">E-mail</label>
+        </div>
+        <div class="form-input">
+            <input id="register-password" type="password" name="password" required>
+            <label for="register-password">Password</label>
+        </div>
+        <div class="form-input">
+            <input id="register-repassword" type="password" name="repassword" required>
+            <label for="register-repassword">Password</label>
+        </div>
+        <div class="form-input">
+            <input id="register-address" type="text" name="delivery_address" required>
+            <label for="register-address">Shipping address</label>
+        </div>
+        <select name="type" required>
+            <option value="" disabled selected>Select an option</option>
+            <option value="1">Alumni</option>
+            <option value="2">Student</option>
+            <option value="3">Teacher</option>
+        </select>
+
+        <button>Sign up</button>
+    </form>
+</div>
