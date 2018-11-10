@@ -11,4 +11,14 @@ router.get('/:id', (req, res) => {
   });
 });
 
+router.post('/add/:id', (req, res) => {
+  if (req.session.basket) {
+    req.session.basket.push(req.params.id);
+  } else {
+    req.session.basket = [req.params.id];
+  }
+
+  res.sendStatus(200);
+});
+
 module.exports = router;
