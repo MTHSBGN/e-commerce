@@ -31,7 +31,7 @@
 
 .basket-product__text {
   margin-left: 20px;
-  width: 700px;
+  width: 650px;
 }
 
 .basket-product__quantity {
@@ -42,3 +42,6 @@
   margin-right: 30px;
 }
 
+.basket-product__price {
+  width: 120px;
+}

@@ -1,8 +1,12 @@
 {{> header @root}}
 <div class="products">
-  <h1>Votre panier</h1>
+  {{#if empty}}
+  <h2>Votre panier est vide</h2>
+  {{else}}
+  <h2>Votre panier</h2>
   {{#each products}}
   <div class="basket-product box">
+    <div style="display: none" class="product_id">{{product_id}}</div>
     <img src="http://localhost:3000/images/products/{{main_image}}" alt="" class="basket-product__logo">
     <div class="basket-product__info">
       <div class="basket-product__text">
@@ -10,11 +14,15 @@
         <p>{{price}}€</p>
       </div>
       <div class="basket-product__quantity">
-        <input type="number" min="0" max="10" value="{{quantity}}" class="basket-product__input">
-        <p>Total: {{total_price}}€</p>
+        <input type="number" min="0" max="10" value="{{quantity}}" class="basket-product__input" id="quantity-update">
+        <p class="basket-product__price">Total: {{total_price}}€</p>
+        <img src="http://localhost:3000/images/cancel.svg" alt="" class="basket-product__cancel">
       </div>
     </div>
   </div>
   {{/each}}
   <p class="products__total">Prix total: {{total}}€</p>
+  {{/if}}
 </div>
+
+<script src="http://localhost:3000/js/updateBasket.js"></script>
