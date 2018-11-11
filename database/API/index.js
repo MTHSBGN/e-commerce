@@ -50,9 +50,11 @@ app.use((req, res, next) => {
 const home = require('./routes/home');
 const account = require('./routes/account');
 const product = require('./routes/product');
+const basket = require('./routes/basket');
 
 app.use('/', home);
 app.use('/', account);
 app.use('/product', product);
+app.use('/basket', basket);
 
 app.listen(port);

@@ -8,11 +8,7 @@ connection = mysql.createConnection({
   database: 'group15'
 });
 
-function query(query, filename) {
-  if (filename && query === '') {
-    query = fs.readFileSync(filename, 'utf-8').trim();
-  }
-
+function query(query) {
   return new Promise((resolve, reject) => {
     connection.query(query, (err, rows) => {
       if (err) {

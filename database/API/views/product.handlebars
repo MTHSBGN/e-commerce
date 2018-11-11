@@ -1,12 +1,12 @@
 {{> header @root}}
 <div id="product-container">
-  <img src="{{main_image}}">
+  <img src="http://localhost:3000/images/products/{{main_image}}">
   <div id="product-info-container">
     <h2>{{name}}</h2>
     <p>{{price}}</p>
     <p>{{description}}</p>
     <div id="product-basket">
-      <input type="number">
+      <input id="input-quantity" type="number">
       <button id="basket-button">Ajouter au panier</button>
     </div>
   </div>
