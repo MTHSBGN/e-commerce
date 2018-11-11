@@ -43,22 +43,55 @@ router.post('/login', (req, res) => {
     });
 });
 
+router.get('/logout', (req, res) => {
+  req.session.login = false;
+  res.redirect('/');
+});
+
 router.get('/signup', (req, res) => {
   res.render('signup');
 });
 
 router.post('/signup', (req, res) => {
+  let client_id = 0;
+  let email = req.body.email;
+  let username = req.body.username;
+  let password = credentials.hash(req.body.password);
+  let firstname = req.body.firstname;
+  let lastname = req.body.lastname;
+  let delivery_address = req.body.delivery_address;
+  let type = req.body.type;
+  let cookie_id = req.sessionID;
+
   query('SELECT Customer.client_id FROM Customer')
     .then(rows => {
-      let client_id = firstFreeId(rows);
-      let email = req.body.email;
-      let username = req.body.username;
-      let password = credentials.hash(req.body.password);
-      let firstname = req.body.firstname;
-      let lastname = req.body.lastname;
-      let delivery_address = req.body.delivery_address;
-      let type = req.body.type;
-      let cookie_id = req.sessionID;
+      client_id = firstFreeId(rows);
+
+      return query(
+        `SELECT * FROM Customer WHERE Customer.username = "${username}"`
+      );
+    })
+    .then(rows => {
+      if (rows.length != 0) {
+        res.render('signup', {
+          error: true,
+          errorMessage: "Ce nom d'utilisateur est déjà pris"
+        });
+
+        return Promise.reject();
+      }
+
+      return query(`SELECT * FROM Customer WHERE Customer.email = "${email}"`);
+    })
+    .then(rows => {
+      if (rows.length != 0) {
+        res.render('signup', {
+          error: true,
+          errorMessage: 'Cette adresse email est déjà prise'
+        });
+
+        return Promise.reject();
+      }
 
       values = `(${client_id}, "${email}", "${username}", "${password}", "${firstname}", "${lastname}", "${delivery_address}", "${type}", "${cookie_id}")`;
 
@@ -68,7 +101,9 @@ router.post('/signup', (req, res) => {
       res.redirect('/');
     })
     .catch(err => {
-      console.log(err);
+      if (err) {
+        console.log(err);
+      }
     });
 });
 
