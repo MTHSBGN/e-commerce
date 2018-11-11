@@ -9,9 +9,17 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-  let email = req.body.email;
+  let login = req.body.login;
+  let queryString = 'SELECT * FROM Customer WHERE ';
+  let email = true;
+  if (login.includes('@')) {
+    queryString += `Customer.email = "${login}"`;
+  } else {
+    email = false;
+    queryString += `Customer.username = "${login}"`;
+  }
 
-  query(`SELECT * FROM Customer WHERE Customer.email = "${email}"`)
+  query(queryString)
     .then(rows => {
       out = {
         error: true,
@@ -19,13 +27,14 @@ router.post('/login', (req, res) => {
       };
 
       if (rows.length == 0) {
-        out.errorMessage = 'This email does not exist';
+        let message = email ? 'Cette adresse email' : "Ce nom d'utilisateur";
+        out.errorMessage = message + " n'existe pas";
         res.render('login', out);
       } else if (credentials.compare(req.body.password, rows[0].password)) {
         req.session.login = true;
         res.redirect('/');
       } else {
-        out.errorMessage = 'Invalid password';
+        out.errorMessage = "Le mot de passe n'est pas valide";
         res.render('login', out);
       }
     })

@@ -1,7 +1,11 @@
+@import 'forms.css';
+
 * {
   margin: 0;
   font-family: 'Lato', 'sans-serif';
 }
+
+/*
 
 header {
   display: flex;
@@ -62,4 +66,4 @@ header {
 
 .card-info {
   padding: 5px 10px;
-}
+} */

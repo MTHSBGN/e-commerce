@@ -24,7 +24,11 @@ router.get('/', (req, res) => {
         total += rows[i].total;
       }
 
-      res.render('basket', { products: rows, total: total });
+      res.render('basket', {
+        login: req.session.login,
+        products: rows,
+        total: total
+      });
     })
     .catch(err => {
       console.log(err);
