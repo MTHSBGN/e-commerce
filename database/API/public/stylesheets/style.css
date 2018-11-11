@@ -12,14 +12,20 @@ a {
   text-decoration: none;
 }
 
+.product_link {
+  color: black;
+}
+
+.product_link:visited {
+  color: black;
+}
+
 .box {
   border: 1px solid #d8dee2;
   border-radius: 5px;
   margin-top: 10px;
   padding: 20px;
 }
-
-/*
 
 #cards-container {
   width: 80vw;
@@ -45,4 +51,4 @@ a {
 
 .card-info {
   padding: 5px 10px;
-} */
+}
