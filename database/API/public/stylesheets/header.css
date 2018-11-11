@@ -1,0 +1,30 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0b7680;
+  padding: 20px 40px;
+}
+
+.logo {
+  height: 48px;
+}
+
+.menu__ul {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+}
+
+.menu__list-item {
+  margin: 0px 20px;
+}
+
+.menu__link {
+  color: white;
+  text-decoration: none;
+}
+
+.menu__link:hover {
+  text-decoration: underline;
+}

@@ -1,17 +1,16 @@
-<header>
+<header class="header">
   <a href="/">
-    <img id="logo" src="http://localhost:3000/images/logo-white.svg" alt="">
+    <img class="logo" src="http://localhost:3000/images/logo-white.svg" alt="">
   </a>
-  <nav id="menu">
-    <ul>
-      <li>
-        {{#if login}}
-        <a href="#">Votre compte</a>
-        {{else}}
-        <a href="/login">Se connecter</a>
-        {{/if}}
+  <nav class="menu">
+    <ul class="menu__ul">
+      {{#if login}}
+      <li class="menu__list-item"><a href="/account" class="menu__link">Votre compte</a>
+      <li class="menu__list-item"><a href="/basket" class="menu__link">Panier</a></li>
+      {{else}}
+      <li class="menu__list-item"><a href="/login" class="menu__link">Se connecter</a></li>
+      {{/if}}
       </li>
-      <li><a href="/basket">Panier</a></li>
     </ul>
   </nav>
 </header>

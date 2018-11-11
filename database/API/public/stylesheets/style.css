@@ -1,3 +1,4 @@
+@import 'header.css';
 @import 'forms.css';
 
 * {
@@ -5,42 +6,11 @@
   font-family: 'Lato', 'sans-serif';
 }
 
-/*
-
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #0b7680;
-  padding: 20px 40px;
-}
-
-#logo {
-  height: 64px;
-}
-
-#menu ul {
-  list-style-type: none;
-  display: flex;
-  align-items: center;
-}
-
-#menu li {
-  margin: 0px 20px;
-}
-
-#menu a {
-  color: white;
+a {
   text-decoration: none;
 }
 
-#menu a:visited {
-  color: white;
-}
-
-#menu a:hover {
-  text-decoration: underline;
-}
+/*
 
 #cards-container {
   width: 80vw;
