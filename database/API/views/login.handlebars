@@ -1,6 +1,6 @@
 <div class="form">
     <h2 class="form--centered text--centered">Connectez-vous</h2>
-    <div class="form__box form--centered">
+    <div class="box form--centered">
         <form action="/login" method="post" class="form__form">
             <label for="login" class="form__label">Nom d'utilisateur ou email</label>
             <input type="text" name="login" id="login" class="form__input" required>
@@ -11,11 +11,11 @@
             <button type="submit" class="form__button">Se connecter</button>
         </form>
     </div>
-    <div class="form__box form--centered">
+    <div class="box form--centered">
         <p class="text--centered">Pas encore inscrit ?<a href="/signup" class="form__link">Créer un compte</a></p>
     </div>
     {{#if error}}
-    <div class="form__box form--centered form__error">
+    <div class="box form--centered form__error">
         <p class="text--centered">{{errorMessage}}</p>
     </div>
     {{/if}}

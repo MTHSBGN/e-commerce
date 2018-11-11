@@ -20,8 +20,8 @@ router.get('/', (req, res) => {
       let total = 0;
       for (let i = 0; i < rows.length; i++) {
         rows[i].quantity = req.session.basket[i].quantity;
-        rows[i].total = rows[i].price * rows[i].quantity;
-        total += rows[i].total;
+        rows[i].total_price = rows[i].price * rows[i].quantity;
+        total += rows[i].total_price;
       }
 
       res.render('basket', {

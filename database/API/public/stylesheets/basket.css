@@ -1,0 +1,44 @@
+.products {
+  width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.products__total {
+  padding: 20px;
+  text-align: right;
+}
+
+.basket-product {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.basket-product__logo {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.basket-product__info {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+}
+
+.basket-product__text {
+  margin-left: 20px;
+  width: 700px;
+}
+
+.basket-product__quantity {
+  display: flex;
+}
+
+.basket-product__input {
+  margin-right: 30px;
+}
+

@@ -1,6 +1,7 @@
 @import 'header.css';
 @import 'forms.css';
 @import 'product.css';
+@import 'basket.css';
 
 * {
   margin: 0;
@@ -9,6 +10,13 @@
 
 a {
   text-decoration: none;
+}
+
+.box {
+  border: 1px solid #d8dee2;
+  border-radius: 5px;
+  margin-top: 10px;
+  padding: 20px;
 }
 
 /*

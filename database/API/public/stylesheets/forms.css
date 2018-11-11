@@ -8,13 +8,6 @@
   margin: auto;
 }
 
-.form__box {
-  border: 1px solid #d8dee2;
-  border-radius: 5px;
-  margin-top: 10px;
-  padding: 20px;
-}
-
 .form__form {
   display: flex;
   flex-direction: column;
