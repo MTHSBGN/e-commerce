@@ -14,8 +14,10 @@ router.get('/:id', (req, res) => {
 
   query(queryString)
     .then(rows => {
-      context = rows[0];
-      context.login = req.session.login;
+      context = {
+        product: rows[0],
+        login: req.session.login
+      };
       res.render('product', context);
     })
     .catch(err => {
