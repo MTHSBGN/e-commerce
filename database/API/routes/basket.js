@@ -1,5 +1,5 @@
 const express = require('express');
-const query = require('../lib/database');
+const database = require('../lib/database');
 
 const router = express.Router();
 
@@ -29,7 +29,8 @@ router.get('/', (req, res) => {
   GROUP BY Sku.sku_id`;
 
   let total = 0;
-  query(queryString)
+  database
+    .query(queryString)
     .then(rows => {
       for (let i = 0; i < rows.length; i++) {
         rows[i].quantity = parseInt(req.session.basket[i].quantity);

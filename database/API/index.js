@@ -51,10 +51,12 @@ const home = require('./routes/home');
 const account = require('./routes/account');
 const product = require('./routes/product');
 const basket = require('./routes/basket');
+const payement = require('./routes/payment');
 
 app.use('/', home);
 app.use('/', account);
 app.use('/product', product);
 app.use('/basket', basket);
+app.use('/payment', payement);
 
 app.listen(port);

@@ -1,5 +1,5 @@
 const express = require('express');
-const query = require('../lib/database');
+const database = require('../lib/database');
 
 const router = express.Router();
 
@@ -13,7 +13,8 @@ router.get('/:id', (req, res) => {
   ON Sku.sku_id = Image.sku_id
   WHERE Product.product_id = ${req.params.id}`;
 
-  query(queryString)
+  database
+    .query(queryString)
     .then(rows => {
       context = {
         product: rows[0],

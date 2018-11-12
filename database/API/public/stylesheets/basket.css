@@ -45,3 +45,9 @@
 .basket-product__price {
   width: 120px;
 }
+
+.button_pay {
+  float: right;
+  margin: 0;
+  width: 100px;
+}

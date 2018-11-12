@@ -1,5 +1,5 @@
 const express = require('express');
-const query = require('../lib/database');
+const database = require('../lib/database');
 const credentials = require('../lib/credentials');
 
 const router = express.Router();
@@ -19,7 +19,8 @@ router.post('/login', (req, res) => {
     queryString += `Customer.username = "${login}"`;
   }
 
-  query(queryString)
+  database
+    .query(queryString)
     .then(rows => {
       out = {
         error: true,
@@ -63,11 +64,12 @@ router.post('/signup', (req, res) => {
   let type = req.body.type;
   let cookie_id = req.sessionID;
 
-  query('SELECT Customer.client_id FROM Customer')
+  database
+    .query('SELECT Customer.client_id FROM Customer')
     .then(rows => {
       client_id = firstFreeId(rows);
 
-      return query(
+      return database.query(
         `SELECT * FROM Customer WHERE Customer.username = "${username}"`
       );
     })
@@ -81,7 +83,9 @@ router.post('/signup', (req, res) => {
         return Promise.reject();
       }
 
-      return query(`SELECT * FROM Customer WHERE Customer.email = "${email}"`);
+      return database.query(
+        `SELECT * FROM Customer WHERE Customer.email = "${email}"`
+      );
     })
     .then(rows => {
       if (rows.length != 0) {
@@ -95,7 +99,7 @@ router.post('/signup', (req, res) => {
 
       values = `(${client_id}, "${email}", "${username}", "${password}", "${firstname}", "${lastname}", "${delivery_address}", "${type}", "${cookie_id}")`;
 
-      return query(`INSERT INTO Customer VALUES ${values}`);
+      return database.query(`INSERT INTO Customer VALUES ${values}`);
     })
     .then(() => {
       res.redirect('/');

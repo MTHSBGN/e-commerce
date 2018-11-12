@@ -1,5 +1,5 @@
 const express = require('express');
-const query = require('../lib/database');
+const database = require('../lib/database');
 
 const router = express.Router();
 
@@ -12,7 +12,7 @@ router.get('/', function(req, res) {
   ON Sku.sku_id = Image.sku_id
   GROUP BY Product.product_id`;
 
-  query(queryString).then(rows => {
+  database.query(queryString).then(rows => {
     res.render('home', {
       products: rows,
       login: req.session.login
