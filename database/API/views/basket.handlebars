@@ -6,8 +6,8 @@
   <h2>Votre panier</h2>
   {{#each products}}
   <div class="basket-product box">
-    <div style="display: none" class="product_id">{{product_id}}</div>
-    <img src="http://localhost:3000/images/products/{{main_image}}" alt="" class="basket-product__logo">
+    <div style="display: none" class="product_id">{{sku_id}}</div>
+    <img src="http://localhost:3000/images/products/{{filename}}" alt="" class="basket-product__logo">
     <div class="basket-product__info">
       <div class="basket-product__text">
         <p>{{name}}</p>

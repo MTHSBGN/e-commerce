@@ -4,12 +4,13 @@ const query = require('../lib/database');
 const router = express.Router();
 
 router.get('/:id', (req, res) => {
-  queryString = `SELECT DISTINCT Product.product_id, Product.name, Product.main_image, Sku.price, Description.french AS description
-  FROM Product
+  queryString = `SELECT * FROM Product
   INNER JOIN Sku
   ON Product.product_id = Sku.product_id
   INNER JOIN Description
   ON Product.description_id = Description.description_id
+  INNER JOIN Image
+  ON Sku.sku_id = Image.sku_id
   WHERE Product.product_id = ${req.params.id}`;
 
   query(queryString)

@@ -4,9 +4,15 @@ const query = require('../lib/database');
 const router = express.Router();
 
 router.get('/', function(req, res) {
-  query(
-    'SELECT DISTINCT Product.product_id, Product.name, Product.main_image, Sku.price FROM Product INNER JOIN Sku ON Product.product_id = Sku.product_id'
-  ).then(rows => {
+  let queryString = `SELECT * 
+  FROM Product
+  INNER JOIN Sku
+  ON Product.product_id = Sku.product_id
+  INNER JOIN Image
+  ON Sku.sku_id = Image.sku_id
+  GROUP BY Product.product_id`;
+
+  query(queryString).then(rows => {
     res.render('home', {
       products: rows,
       login: req.session.login

@@ -1,12 +1,13 @@
 {{> header @root}}
 <div class="product">
   {{#with product}}
-  <img src="http://localhost:3000/images/products/{{main_image}}" class="product__image">
+  <img src="http://localhost:3000/images/products/{{filename}}" class="product__image">
   <div class="product__info">
+    <div style="display: none">{{sku_id}}</div>
     <div>
       <h2>{{name}}</h2>
       <p class="product__price">{{price}}€</p>
-      <p>{{description}}</p>
+      <p>{{french}}</p>
     </div>
     <div class="product__basket">
       <input type="number" min="1" max="10" class="form__input" id="quantity" value="1">

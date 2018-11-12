@@ -15,15 +15,18 @@ router.get('/', (req, res) => {
 
   let idString = '';
   for (let product of req.session.basket) {
-    idString += `${product.id},`;
+    idString += `"${product.id}",`;
   }
 
   let queryString = `SELECT * 
   FROM Product
   INNER JOIN Sku
   ON Product.product_id = Sku.product_id
-  WHERE Product.product_id 
-  IN (${idString.slice(0, idString.length - 1)})`;
+  INNER JOIN Image
+  ON Sku.sku_id = Image.sku_id
+  WHERE Sku.sku_id 
+  IN (${idString.slice(0, idString.length - 1)})
+  GROUP BY Sku.sku_id`;
 
   let total = 0;
   query(queryString)
@@ -76,7 +79,7 @@ router.post('/:id', (req, res) => {
       req.session.basket = [product];
     } else {
       for (let i = 0; i < size; i++) {
-        if (parseInt(req.session.basket[i].id) > parseInt(req.params.id)) {
+        if (req.session.basket[i].id > req.params.id) {
           req.session.basket.splice(i, 0, product);
           break;
         } else if (i == size - 1) {

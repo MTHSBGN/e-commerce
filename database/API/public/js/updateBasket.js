@@ -1,3 +1,18 @@
+// Add an item to the basket
+let basketButton = document.getElementById('add-basket');
+if (basketButton) {
+  basketButton.onclick = function() {
+    let req = new XMLHttpRequest();
+    let sku_id = this.closest('.product__info').children[0].innerHTML;
+    let quantityInput = document.getElementById('quantity');
+
+    req.open('POST', `http://localhost:3000/basket/${sku_id}`, true);
+    req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    req.send(`quantity=${quantityInput.value}`);
+  };
+}
+
+// Delete an item form the basket
 let removeButtons = document.getElementsByClassName('basket-product__cancel');
 for (element of removeButtons) {
   element.onclick = function() {
@@ -16,6 +31,7 @@ for (element of removeButtons) {
   };
 }
 
+// Update an item from the basket
 let quantityUpdate = document.getElementById('quantity-update');
 if (quantityUpdate) {
   quantityUpdate.onchange = function() {
@@ -30,22 +46,5 @@ if (quantityUpdate) {
         document.location.reload();
       }
     };
-  };
-}
-
-let basketButton = document.getElementById('add-basket');
-if (basketButton) {
-  basketButton.onclick = function() {
-    let req = new XMLHttpRequest();
-    let arr = window.location.pathname.split('/');
-    let quantityInput = document.getElementById('quantity');
-
-    req.open(
-      'POST',
-      `http://localhost:3000/basket/${arr[arr.length - 1]}`,
-      true
-    );
-    req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    req.send(`quantity=${quantityInput.value}`);
   };
 }
