@@ -5,7 +5,7 @@ const Sku = require('./sku');
 const Image = database.define(
   'Image',
   {
-    image_id: { type: Sequelize.INTEGER, primaryKey: true, allowNull: false },
+    image_id: { type: Sequelize.INTEGER, primaryKey: true, allowNull: false, autoIncrement: true },
     sku_id: {
       type: Sequelize.STRING,
       allowNull: false,

@@ -2,6 +2,7 @@
 @import 'forms.css';
 @import 'product.css';
 @import 'basket.css';
+@import 'admin.css';
 
 * {
   margin: 0;

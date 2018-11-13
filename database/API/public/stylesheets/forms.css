@@ -8,6 +8,10 @@
   margin: auto;
 }
 
+.large {
+  width: 600px;
+}
+
 .form__form {
   display: flex;
   flex-direction: column;
@@ -60,4 +64,9 @@
 
 .text--centered {
   text-align: center;
+}
+
+fieldset {
+  display: flex;
+  flex-direction: column;
 }

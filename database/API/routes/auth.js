@@ -27,7 +27,8 @@ router.post('/login', (req, res) => {
         req.session.user = {
           name: customer.dataValues.firstname,
           delivery_address: customer.dataValues.delivery_address,
-          admin: customer.dataValues.type == 0
+          admin: customer.dataValues.type == 0,
+          id: customer.dataValues.customer_id
         };
         res.redirect('/');
       } else {
@@ -76,11 +77,12 @@ router.post('/signup', (req, res) => {
         session_id: req.sessionID
       });
     })
-    .then(() => {
+    .then(customer => {
       req.session.user = {
-        name: req.body.firstname,
-        delivery_address: req.body.delivery_address,
-        admin: req.body.type == 0
+        name: customer.dataValues.firstname,
+        delivery_address: customer.dataValues.delivery_address,
+        admin: customer.dataValues.type == 0,
+        id: customer.dataValues.customer_id
       };
 
       res.redirect('/');

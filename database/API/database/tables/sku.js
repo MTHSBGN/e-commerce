@@ -11,8 +11,10 @@ const Sku = database.define(
       allowNull: false,
       references: { model: Product, key: 'product_id' }
     },
+    description: { type: Sequelize.TEXT, allowNull: false },
     price: { type: Sequelize.FLOAT, allowNull: false },
-    stock: { type: Sequelize.INTEGER, allowNull: false, validate: { min: 0 } }
+    stock: { type: Sequelize.INTEGER, allowNull: false, validate: { min: 0 } },
+    sold: { type: Sequelize.INTEGER, allowNull: false, validate: { min: 0 } }
   },
   { freezeTableName: true }
 );

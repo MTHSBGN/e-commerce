@@ -39,10 +39,7 @@ app.set('view engine', 'handlebars');
 //  CORS support
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
-  );
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
 
@@ -52,11 +49,13 @@ const auth = require('./routes/auth');
 const product = require('./routes/product');
 const basket = require('./routes/basket');
 const payement = require('./routes/payment');
+const admin = require('./routes/admin');
 
 app.use('/', home);
 app.use('/', auth);
 app.use('/product', product);
 app.use('/basket', basket);
 app.use('/payment', payement);
+app.use('/admin', admin);
 
 app.listen(port);
