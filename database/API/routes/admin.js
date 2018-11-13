@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 
 router.post('/add/product/', (req, res) => {
   let sku_ids = JSON.parse(req.body.sku_ids);
-  console.log(sku_ids)
+  console.log(sku_ids);
   sequelize
     .transaction(t => {
       return models.Product.create({ name: req.body.name }, { transaction: t })
@@ -29,8 +29,8 @@ router.post('/add/product/', (req, res) => {
             promises.push(
               models.Sku.create(
                 {
-                  sku_id: sku.sku_id,
-                  product_id: product.dataValues.product_id,
+                  id: sku.sku_id,
+                  product_id: product.dataValues.id,
                   description: sku.description,
                   price: sku.price,
                   stock: sku.stock,

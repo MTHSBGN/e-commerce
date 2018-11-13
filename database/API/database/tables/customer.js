@@ -27,7 +27,7 @@ const Customer = database.define(
     },
     session_id: { type: Sequelize.STRING, allowNull: false }
   },
-  { freezeTableName: true }
+  { freezeTableName: true, underscored: true }
 );
 
 module.exports = Customer;

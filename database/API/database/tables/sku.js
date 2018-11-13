@@ -5,18 +5,16 @@ const Product = require('./product');
 const Sku = database.define(
   'Sku',
   {
-    sku_id: { type: Sequelize.STRING, primaryKey: true, allowNull: false },
-    product_id: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-      references: { model: Product, key: 'product_id' }
-    },
+    id: { type: Sequelize.STRING, primaryKey: true, allowNull: false },
     description: { type: Sequelize.TEXT, allowNull: false },
     price: { type: Sequelize.FLOAT, allowNull: false },
     stock: { type: Sequelize.INTEGER, allowNull: false, validate: { min: 0 } },
     sold: { type: Sequelize.INTEGER, allowNull: false, validate: { min: 0 } }
   },
-  { freezeTableName: true }
+  { freezeTableName: true, underscored: true }
 );
+
+Sku.belongsTo(Product);
+Product.hasMany(Sku);
 
 module.exports = Sku;

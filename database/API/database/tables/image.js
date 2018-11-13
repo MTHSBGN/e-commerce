@@ -5,15 +5,13 @@ const Sku = require('./sku');
 const Image = database.define(
   'Image',
   {
-    image_id: { type: Sequelize.INTEGER, primaryKey: true, allowNull: false, autoIncrement: true },
-    sku_id: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      references: { model: Sku, key: 'sku_id' }
-    },
+    id: { type: Sequelize.INTEGER, primaryKey: true, allowNull: false, autoIncrement: true },
     filename: { type: Sequelize.STRING, allowNull: false }
   },
-  { freezeTableName: true }
+  { freezeTableName: true, underscored: true }
 );
+
+Image.belongsTo(Sku);
+Sku.hasMany(Image);
 
 module.exports = Image;
