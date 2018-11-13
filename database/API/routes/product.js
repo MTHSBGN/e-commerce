@@ -1,29 +1,23 @@
 const express = require('express');
-
+const models = require('../database/index');
 const router = express.Router();
 
 router.get('/:id', (req, res) => {
-  queryString = `SELECT * FROM Product
-  INNER JOIN Sku
-  ON Product.product_id = Sku.product_id
-  INNER JOIN Description
-  ON Product.description_id = Description.description_id
-  INNER JOIN Image
-  ON Sku.sku_id = Image.sku_id
-  WHERE Product.product_id = ${req.params.id}`;
+  models.Sku.findOne({
+    include: [{ model: models.Product, where: { id: req.params.id } }, { model: models.Image }]
+  }).then(sku => {
+    let p = sku.dataValues.Product;
+    let images = sku.dataValues.Images;
+    let product = {
+      sku_id: sku.dataValues.id,
+      name: p.dataValues.name,
+      description: sku.dataValues.description,
+      price: sku.dataValues.price,
+      filename: images[0].dataValues.filename
+    };
 
-  database
-    .query(queryString)
-    .then(rows => {
-      context = {
-        product: rows[0],
-        login: req.session.login
-      };
-      res.render('product', context);
-    })
-    .catch(err => {
-      console.log(err);
-    });
+    res.render('product', { user: req.session.user, product: product });
+  });
 });
 
 router.post('/add/:id', (req, res) => {
