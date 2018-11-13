@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
     database
       .beginTransaction()
       .then(() => {
-        queryString = `SELECT @orderID := COALESCE(MAX(Client_order.order_id), 1)
+        queryString = `SELECT @orderID := COALESCE(MAX(Client_order.order_id) + 1, 1)
         FROM Client_order;`;
         return database.query(queryString);
       })
