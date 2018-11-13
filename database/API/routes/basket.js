@@ -1,52 +1,56 @@
 const express = require('express');
+const models = require('../database/index');
 
 const router = express.Router();
 
 router.get('/', (req, res) => {
   if (!req.session.basket || req.session.basket.length == 0) {
     res.render('basket', {
-      login: req.session.login,
+      user: req.session.user,
       empty: true
     });
 
     return;
   }
 
-  let idString = '';
-  for (let product of req.session.basket) {
-    idString += `"${product.id}",`;
+  let ids = [];
+  for (item of req.session.basket) {
+    ids.push(item.id);
   }
 
-  let queryString = `SELECT * 
-  FROM Product
-  INNER JOIN Sku
-  ON Product.product_id = Sku.product_id
-  INNER JOIN Image
-  ON Sku.sku_id = Image.sku_id
-  WHERE Sku.sku_id 
-  IN (${idString.slice(0, idString.length - 1)})
-  GROUP BY Sku.sku_id`;
+  models.Sku.findAll({
+    include: [{ model: models.Product }, { model: models.Image }],
+    where: {
+      id: ids
+    }
+  }).then(skus => {
+    let products = [];
+    let total = 0;
+    for (let i = 0; i < skus.length; i++) {
+      let sku = skus[i];
+      let product = sku.dataValues.Product;
+      let images = sku.dataValues.Images;
 
-  let total = 0;
-  database
-    .query(queryString)
-    .then(rows => {
-      for (let i = 0; i < rows.length; i++) {
-        rows[i].quantity = parseInt(req.session.basket[i].quantity);
-        rows[i].total_price = rows[i].price * rows[i].quantity;
-        total += rows[i].total_price;
-      }
+      let total_price = sku.dataValues.price * req.session.basket[i].quantity;
+      total += total_price;
 
-      res.render('basket', {
-        login: req.session.login,
-        products: rows,
-        total: total,
-        empty: false
+      products.push({
+        sku_id: sku.dataValues.id,
+        name: product.dataValues.name,
+        price: sku.dataValues.price,
+        filename: images[0].dataValues.filename,
+        quantity: req.session.basket[i].quantity,
+        total_price: total_price.toFixed(2)
       });
-    })
-    .catch(err => {
-      console.log(err);
+    }
+
+    res.render('basket', {
+      user: req.session.user,
+      products: products,
+      total: total.toFixed(2),
+      empty: false
     });
+  });
 });
 
 router.post('/:id', (req, res) => {
