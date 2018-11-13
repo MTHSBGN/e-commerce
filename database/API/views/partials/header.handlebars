@@ -4,8 +4,11 @@
   </a>
   <nav class="menu">
     <ul class="menu__ul">
-      {{#if login}}
-      <li class="menu__list-item"><a href="/account" class="menu__link">Votre compte</a>
+      {{#if user}}
+      <li class="menu__list-item">Bonjour {{user.name}}</li>
+      {{#if user.admin}}
+      <li class="menu__list-item"><a href="/admin" class="menu__link">Admin</a></li>
+      {{/if}}
       <li class="menu__list-item"><a href="/basket" class="menu__link">Panier</a></li>
       <li class="menu__list-item"><a href="/logout" class="menu__link">Se déconnecter</a></li>
       {{else}}

@@ -1,5 +1,4 @@
 const express = require('express');
-const database = require('../lib/database');
 
 const router = express.Router();
 
@@ -24,13 +23,14 @@ router.get('/', (req, res) => {
     database
       .beginTransaction()
       .then(() => {
-        queryString = `SELECT @orderID := COALESCE(MAX(Client_order.order_id) + 1, 1)
-        FROM Client_order;`;
+        queryString = `SELECT @orderID := COALESCE(MAX(Client_order.order_id) + 1, 1) FROM Client_order;`;
         return database.query(queryString);
       })
       .then(() => {
-        queryString = `INSERT INTO Client_order VALUES (@orderID, ${client_id}, "2015-12-20 10:01:00", 10, '');`;
-        return database.query(queryString);
+        return database.insert(
+          'Client_order',
+          '(@orderID, ${client_id}, "2015-12-20 10:01:00", 10, "")'
+        );
       })
       .then(() => {
         queryString = `INSERT INTO Order_details VALUES `;

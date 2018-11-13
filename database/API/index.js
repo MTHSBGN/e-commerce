@@ -48,13 +48,13 @@ app.use((req, res, next) => {
 
 // API Routes
 const home = require('./routes/home');
-const account = require('./routes/account');
+const auth = require('./routes/auth');
 const product = require('./routes/product');
 const basket = require('./routes/basket');
 const payement = require('./routes/payment');
 
 app.use('/', home);
-app.use('/', account);
+app.use('/', auth);
 app.use('/product', product);
 app.use('/basket', basket);
 app.use('/payment', payement);
