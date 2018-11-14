@@ -3,6 +3,7 @@
 @import 'product.css';
 @import 'basket.css';
 @import 'admin.css';
+@import 'search.css';
 
 * {
   margin: 0;

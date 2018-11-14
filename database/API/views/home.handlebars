@@ -1,4 +1,9 @@
 {{> header @root}}
+<div class="autocomplete">
+    <label for="myInput" class="form__label">Recherche</label>
+    <input id="myInput" type="text" name="search" placeholder="Produit" class="form__input">
+    <button type="button" id="searchButton" class="form__button">Continuer</button>
+</div>
 <div id="cards-container">
     {{#each products}}
     <a href="/product/{{id}}" class="product_link">
@@ -12,3 +17,4 @@
     </a>
     {{/each}}
 </div>
+<script src="http://localhost:3000/js/search.js"></script>

@@ -1,5 +1,4 @@
 const express = require('express');
-const Sequelize = require('sequelize');
 const models = require('../database/index');
 
 const router = express.Router();
@@ -24,6 +23,17 @@ router.get('/', function(req, res) {
       user: req.session.user,
       products: displayProduct
     });
+  });
+});
+
+router.get('/products', (req, res) => {
+  models.Product.findAll().then(products => {
+    let productNames = [];
+    for (product of products) {
+      productNames.push({ name: product.dataValues.name, id: product.dataValues.id });
+    }
+
+    res.json(productNames);
   });
 });
 
