@@ -61,15 +61,15 @@ The website is divided into section. The first section is dedicated to the admin
 \subsection{Admin panel}
 The admin panel is a dashboard provided to the administrator of the website. The users that can use this panel have special privileges. To detect this kind of users the field \textit{type} of customer table is set to zero. As results, a admin user needs to follow the regular registration phase to create an account and then the super user that has a direct access to the database can change the \textit{type} field to promote a user as admin user. Admin users have an extra button to allow them to access to the admin panel.\\
 
-The dashboard is simple, on the admin homepage you have a summary of your stock. You also have a page to add a new product inside your database. You can also export your files in a csv format that is the standard format to export data.
+The dashboard is simple, on the admin homepage you have a summary of your stock. You also have a page to add a new product inside your database and to export your files in a csv format that is the standard format to export data.
 
-Even if you are on the dashboard you can go back to the e-commerce pages just by clicking on the website button.
+Even if you are on the dashboard you can go back to the e-commerce pages just by clicking on the university logo.
 
 \begin{figure}[h!]
     \centering
-    \subfloat[admin homepage]{{\includegraphics[scale=0.2]{./images/index_admin.png}}}%
+    \subfloat[admin homepage]{{\includegraphics[scale=0.2]{./images/admin.png}}}%
     \qquad
-    \subfloat[product manager]{{\includegraphics[scale=0.3]{./images/product_admin.png}}}%
+    \subfloat[product manager]{{\includegraphics[scale=0.3]{./images/admin_product.png}}}%
     \caption{admin pages}%
     \label{fig:admin}%
 \end{figure}
@@ -111,7 +111,7 @@ Concerning the security of the website, some common guidelines are applied such 
 Concerning the target of the website it is obvious. It concerns essentially Alumni, employees and students of ULiège. The eShop provides a bunch of goodies related to the university and the city of Liège. Prices given are affordable for student and the aim of the eShop is not to be competitive with others websites that sell similar products. The aim is to provide a website where university community can buy university products easily. The website can also be used by student associations to sell their pulls for instance an provides a legal framework to sell them.
 
 \section{Improvements}
-Concerning the website some improvements can be done. First of all concerning the design, we tried to have a flat design user interface but we are not web designer nor user experience designer (UX). After that, security aspects must be improved and not neglected (DDoS attacks,XSS,etc.). Finally, we also developed the schema \autoref{ecommerce_ER} of a more complex database that has several detailed added. This schema is not implemented for this project but can be used as a basis. 
+Concerning the website some improvements can be done. First of all concerning the design, we tried to have a flat design user interface but we are not web designer nor user experience designer (UX). After that, security aspects must be improved and not neglected (DDoS attacks,XSS,etc.). Finally, we also developed the schema \autoref{ecommerce_ER} and \autoref{ecommerce_SQL} of a more complex database that has several detailed added. This schema is not implemented for this project but can be used as a basis. 
 
 \begin{figure}[h!]
     \centering
