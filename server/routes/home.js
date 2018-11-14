@@ -37,4 +37,8 @@ router.get('/products', (req, res) => {
   });
 });
 
+router.get('/about', (req, res) => {
+  res.render('about', { user: req.session.user });
+});
+
 module.exports = router;
