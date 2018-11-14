@@ -23,27 +23,24 @@ For this project, we decided to work on the proposition given in the statement (
 \section{Database architecture}
 To model the database of the Uliège eShop website a relational database architecture was chosen. The reason of this choice is justified by the product catalogue is not large and because it can be hard to have a good NO-SQL design. On the web you can find some debates that discuss the fact to use relational DBs or no-SQL DBs. The advantage of the no-SQL DB is that it is easier to manage your product catalogue (product variations) but the drawback of no-SQL DBs is the reliability (can be solved with DB clustering e.g: foundationdb, couchDB,...). Concerning the reliability relational DB architectures are, for the majority, ACID compliant. These two types of architectures are not mutual exclusive. Most of the time, e-commerce websites use of combination of SQL and No-SQL DBs (a paper discussing that topic \url{https://aisel.aisnet.org/cgi/viewcontent.cgi?article=1026&context=sais2013}).
 
-\subsection{entity-relationship model}
-\autoref{ecommerce_er} depicts the entity-relationship model based on the minimal requirements given in the statements. We decided to split the product table proposed in the statement into multiple tables to avoid data replications and to provide a scalable approach. Indeed, in the product table proposed, all data linked to a product is packaged into this table. The result of that is it is difficult to manage products with different properties (e.g colors, size,...) without replications. That is why we decided to split this table into several tables that are \textit{Sku (stock keeping units) Variant (gives the properties of a product), Image(image paths related to a product), Description (Give the product description), and Category (specify the product category)}. \\
+\subsection{Entity-relationship model}
+\autoref{ecommerce_er} depicts the entity-relationship model based on the minimal requirements given in the statements. We decided to split the product table proposed in the statement into multiple tables to avoid data replications and to provide a scalable approach. Indeed, in the product table proposed, all data linked to a product is packaged into this table. The result of that is it is difficult to manage products with different properties (e.g colors, size,...) without replications. That is why we decided to split this table into several tables that are \textit{Sku (stock keeping units) and Image(image paths related to a product)}. \\
 
-Concerning the transaction part we decided to split that part into two related steps. The first step establishes a relation between the sku ID, the order ID (defined in the second step) the  current price of the product during the order and the quantity needed. This step is achieved with the table Order\_details. The second step consists in summarizes the the order of the client by referencing the ID of the order, the delivery address, the total price of the order, and  the user ID.
+Concerning the transaction part we decided to split that part into two related steps. The first step establishes a relation between the sku ID, the order ID (defined in the second step) the  current price of the product during the order and the quantity needed. This step is achieved with the table OrderDetails. The second step consists in summarizes the the order of the client by referencing the ID of the order, the delivery address, the total price of the order, and  the user ID.
 
 \subsection{Relational model}
 \begin{enumerate}
-\item Customer(client\_id, mail, username, password, delivery\_address, firstname, lastname, cookie\_id)
-\item Client\_order(order\_id, \#client\_id, date, total\_price, ship\_address)
-\item Order\_details(\#order\_id, \#sku\_id, quantity, price)
-\item Product(product\_id, \#category\_id, \#image\_id, \#description\_id, name)
-\item Image(image\_id, \#sku\_id, filename)
-\item Sku(sku\_id, \#produt\_id, price, available, sold)
-\item Variants(variant\_id, attribute, value)
-\item Description(description\_id, french, english)
-\item Category(category\_id, \#description\_id, name)
+\item Customer(client\_id, mail, username, password, delivery\_address, firstname, lastname, session\_id, update\_at, created\_at)
+\item CustomerOrder(order\_id, \#client\_id, date, total\_price, ship\_address, , update\_at, created\_at)
+\item OrderDetails(\#order\_id, \#sku\_id, quantity, price, update\_at, created\_at)
+\item Product(product\_id, name, update\_at, created\_at)
+\item Image(image\_id, \#sku\_id, filename, update\_at, created\_at)
+\item Sku(sku\_id, \#produt\_id, price, stock, sold, update\_at, created\_at)
 \end{enumerate}
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[scale=0.4]{./images/ecommerce_ER.png}
+    \includegraphics[scale=0.4]{./images/ecommercev2_er.png}
     \caption{eShop entity-relationship model}
     \label{ecommerce_er}
 \end{figure}
@@ -53,7 +50,7 @@ The entity-relational model depicted on \autoref{ecommerce_er} can be translated
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[scale=0.4]{./images/ecommerce_SQL.png}
+    \includegraphics[scale=0.4]{./images/ecommercev2_sql.png}
     \caption{eShop entity-relationship model}
     \label{ecommerce_sql}
 \end{figure}
@@ -64,7 +61,7 @@ The website is divided into section. The first section is dedicated to the admin
 \subsection{Admin panel}
 The admin panel is a dashboard provided to the administrator of the website. The users that can use this panel have special privileges. To detect this kind of users the field \textit{type} of customer table is set to zero. As results, a admin user needs to follow the regular registration phase to create an account and then the super user that has a direct access to the database can change the \textit{type} field to promote a user as admin user. Admin users have an extra button to allow them to access to the admin panel.\\
 
-The dashboard is simple, at left a menu can help the user to navigate through the different webpages. As you can see on the \autoref{fig:admin} the panel only contains 3 pages \textit{(home,product,category)}. The homepage summarizes different parameters, you can also export some data. The product and category pages give the possibility to add new elements to the database easily. \\
+The dashboard is simple, on the admin homepage you have a summary of your stock. You also have a page to add a new product inside your database. You can also export your files in a csv format that is the standard format to export data.
 
 Even if you are on the dashboard you can go back to the e-commerce pages just by clicking on the website button.
 
@@ -114,6 +111,20 @@ Concerning the security of the website, some common guidelines are applied such 
 Concerning the target of the website it is obvious. It concerns essentially Alumni, employees and students of ULiège. The eShop provides a bunch of goodies related to the university and the city of Liège. Prices given are affordable for student and the aim of the eShop is not to be competitive with others websites that sell similar products. The aim is to provide a website where university community can buy university products easily. The website can also be used by student associations to sell their pulls for instance an provides a legal framework to sell them.
 
 \section{Improvements}
-Concerning the website some improvements can be done. First of all concerning the design, we tried to have a flat design user interface but we are not web designer nor user experience designer (UX). After that, security aspects must be improved and not neglected (DDoS attacks,XSS,etc.).
+Concerning the website some improvements can be done. First of all concerning the design, we tried to have a flat design user interface but we are not web designer nor user experience designer (UX). After that, security aspects must be improved and not neglected (DDoS attacks,XSS,etc.). Finally, we also developed the schema \autoref{ecommerce_ER} of a more complex database that has several detailed added. This schema is not implemented for this project but can be used as a basis. 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.4]{./images/ecommerce_ER.png}
+    \caption{eShop entity-relationship model}
+    \label{ecommerce_ER}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.4]{./images/ecommerce_SQL.png}
+    \caption{eShop entity-relationship model}
+    \label{ecommerce_SQL}
+\end{figure}
 \end{document}
 
