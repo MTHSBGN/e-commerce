@@ -28,7 +28,7 @@ router.post('/login', (req, res) => {
           name: customer.dataValues.firstname,
           delivery_address: customer.dataValues.delivery_address,
           admin: customer.dataValues.type == 0,
-          id: customer.dataValues.customer_id
+          id: customer.dataValues.id
         };
         res.redirect('/');
       } else {
@@ -82,7 +82,7 @@ router.post('/signup', (req, res) => {
         name: customer.dataValues.firstname,
         delivery_address: customer.dataValues.delivery_address,
         admin: customer.dataValues.type == 0,
-        id: customer.dataValues.customer_id
+        id: customer.dataValues.id
       };
 
       res.redirect('/');

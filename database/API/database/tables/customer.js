@@ -4,7 +4,7 @@ const database = require('../connection');
 const Customer = database.define(
   'Customer',
   {
-    customer_id: {
+    id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       allowNull: false,

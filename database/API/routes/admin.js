@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   models.Customer.findByPk(req.session.user.id).then(customer => {
-    if (!customer || customer.dataValues.type) {
+    if (!customer || customer.dataValues.type != 0) {
       res.redirect('/');
     } else {
       res.render('admin', {
@@ -19,7 +19,6 @@ router.get('/', (req, res) => {
 
 router.post('/add/product/', (req, res) => {
   let sku_ids = JSON.parse(req.body.sku_ids);
-  console.log(sku_ids);
   sequelize
     .transaction(t => {
       return models.Product.create({ name: req.body.name }, { transaction: t })
