@@ -31,7 +31,7 @@ Concerning the transaction part we decided to split that part into two related s
 \subsection{Relational model}
 \begin{enumerate}
 \item Customer(client\_id, mail, username, password, delivery\_address, firstname, lastname, session\_id, update\_at, created\_at)
-\item CustomerOrder(order\_id, \#client\_id, date, total\_price, ship\_address, , update\_at, created\_at)
+\item CustomerOrder(order\_id, \#client\_id, date, total\_price, ship\_address, update\_at, created\_at)
 \item OrderDetails(\#order\_id, \#sku\_id, quantity, price, update\_at, created\_at)
 \item Product(product\_id, name, update\_at, created\_at)
 \item Image(image\_id, \#sku\_id, filename, update\_at, created\_at)

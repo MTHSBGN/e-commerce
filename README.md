@@ -3,14 +3,14 @@
 # Minimum pages needed
 - [x] register page
 - [x] Login page
-- [ ] Product catalogue page
-- [ ] Basket validation page
+- [x] Product catalogue page
+- [x] Basket validation page
 - [x] Payment page
 - [x] About information page
 - [x] Admin page
 
 # Additional features added
-- [x] Admin panel: Export csv files with specific criteria
+- [x] Admin panel: Export csv files
 - [x] Admin panel: Product manager to insert new elements
 - [x] Admin panel: Tiles that summarize important information about the e-commerce website
 
