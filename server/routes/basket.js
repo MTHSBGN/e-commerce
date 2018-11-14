@@ -65,7 +65,7 @@ router.post('/:id', (req, res) => {
   // Update the product if it is already in the basket
   for (let i = 0; i < size; i++) {
     if (basket[i].id == req.params.id) {
-      basket[i].quantity += req.params.quantity;
+      basket[i].quantity = parseInt(basket[i].quantity) + parseInt(req.body.quantity);
       existed = true;
       break;
     }
