@@ -10,7 +10,35 @@ router.get('/', (req, res) => {
     if (!customer || customer.dataValues.type != 0) {
       res.redirect('/');
     } else {
-      res.render('admin', {
+      return models.Sku.findAll({
+        include: [{ model: models.Product }, { model: models.Image }]
+      }).then(skus => {
+        let products = [];
+        for (sku of skus) {
+          let product = sku.dataValues.Product.dataValues;
+          let images = sku.dataValues.Images;
+          products.push({
+            name: product.name,
+            price: sku.dataValues.price,
+            quantity: sku.dataValues.stock,
+            filename: images[0].dataValues.filename
+          });
+        }
+        res.render('admin', {
+          name: req.session.user.name,
+          products: products
+        });
+      });
+    }
+  });
+});
+
+router.get('/product', (req, res) => {
+  models.Customer.findByPk(req.session.user.id).then(customer => {
+    if (!customer || customer.dataValues.type != 0) {
+      res.redirect('/');
+    } else {
+      res.render('adminProduct', {
         name: req.session.user.name
       });
     }

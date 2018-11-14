@@ -1,25 +1,15 @@
-<header class="header">
-  <a href="/">
-    <img class="logo" src="http://localhost:3000/images/logo-white.svg" alt="">
-  </a>
+{{> adminHeader @root}}
 
-  <h2 class="welcome">Bienvenu dans la section administration, {{name}}!</h2>
-</header>
-
-<div class="form box form--centered large">
-  <form class="form__form">
-    <h2 class="form--centered text--centered">Ajouter un produit</h2>
-    <label for="product_name" class="form__label">Nom du produit</label>
-    <input type="text" id="product_name" class="form__input" required>
-
-    <fieldset id="fieldset_sku">
-      <legend>Stock Keeping Unit(s)</legend>
-
-      <div id="sku_container"></div>
-      <button id="add_sku_button" type="button">Ajouter un SKU</button>
-    </fieldset>
-
-    <button id="confirm_button" type="button" class="form__button">Confirmer</button>
-  </form>
+<h1 style="margin-top: 50px" class="text--centered">Stock</h1>
+{{#each products}}
+<div class="basket-product box admin_product">
+  <img src="http://localhost:3000/images/products/{{filename}}" alt="" class="basket-product__logo">
+  <div class="basket-product__info">
+    <div class="basket-product__text">
+      <p>{{name}}</p>
+      <p>{{price}}€</p>
+    </div>
+    <p>{{quantity}}</p>
+  </div>
 </div>
-<script src="http://localhost:3000/js/admin.js"></script>
+{{/each}}

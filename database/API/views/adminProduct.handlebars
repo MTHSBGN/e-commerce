@@ -1,0 +1,19 @@
+{{> adminHeader @root}}
+
+<div class="form box form--centered large">
+  <form class="form__form">
+    <h2 class="form--centered text--centered">Ajouter un produit</h2>
+    <label for="product_name" class="form__label">Nom du produit</label>
+    <input type="text" id="product_name" class="form__input" required>
+
+    <fieldset id="fieldset_sku">
+      <legend>Stock Keeping Unit(s)</legend>
+
+      <div id="sku_container"></div>
+      <button id="add_sku_button" type="button">Ajouter un SKU</button>
+    </fieldset>
+
+    <button id="confirm_button" type="button" class="form__button">Confirmer</button>
+  </form>
+</div>
+<script src="http://localhost:3000/js/admin.js"></script>
