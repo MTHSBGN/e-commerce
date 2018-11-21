@@ -6,7 +6,6 @@ router.get('/:id', (req, res) => {
   models.Sku.findOne({
     include: [{ model: models.Product, where: { id: req.params.id } }, { model: models.Image }]
   }).then(sku => {
-    console.log(sku);
     let p = sku.dataValues.Product;
     let images = sku.dataValues.Images;
     let product = {

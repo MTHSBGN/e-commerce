@@ -32,26 +32,43 @@ router.get('/', (req, res) => {
             customer_id: req.session.user.id
           },
           { transaction: t }
-        ).then(order => {
-          let promises = [];
-          for (let i = 0; i < skus.length; i++) {
-            let sku = skus[i];
-            promises.push(
-              models.OrderDetails.create(
-                {
-                  sku_id: sku.dataValues.id,
-                  quantity: req.session.basket[i].quantity,
-                  price: sku.dataValues.price.toFixed(2),
-                  customer_order_id: order.dataValues.id
-                },
-                { transaction: t }
-              )
-            );
-          }
-          return Promise.all(promises);
-        });
+        )
+          .then(order => {
+            let promises = [];
+            for (let i = 0; i < skus.length; i++) {
+              let sku = skus[i];
+              promises.push(
+                models.OrderDetails.create(
+                  {
+                    sku_id: sku.dataValues.id,
+                    quantity: req.session.basket[i].quantity,
+                    price: sku.dataValues.price.toFixed(2),
+                    customer_order_id: order.dataValues.id
+                  },
+                  { transaction: t }
+                )
+              );
+            }
+            return Promise.all(promises);
+          })
+          .then(orders => {
+            let promises = [];
+            for (let i = 0; i < orders.length; i++) {
+              promises.push(
+                models.Sku.findByPk(orders[i].dataValues.sku_id, { transaction: t }).then(sku => {
+                  sku.update(
+                    { stock: sku.dataValues.stock - orders[i].dataValues.quantity },
+                    { transaction: t }
+                  );
+                })
+              );
+            }
+
+            return Promise.all(promises);
+          });
       })
       .then(() => {
+        req.session.basket = []
         res.send('');
       })
       .catch(err => {
