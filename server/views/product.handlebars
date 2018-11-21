@@ -10,8 +10,12 @@
       <p>{{description}}</p>
     </div>
     <div class="product__basket">
-      <input type="number" min="1" max="10" class="form__input" id="quantity" value="1">
+      {{#if empty}}
+      <p>Ce produit est en rupture de stock</p>
+      {{else}}
+      <input type="number" min="1" max="{{stock}}" class="form__input" id="quantity" value="1">
       <button type="button" id="add-basket" class="form__button product__button">Ajouter au panier</button>
+      {{/if}}
     </div>
   </div>
   {{/with}}

@@ -6,6 +6,7 @@ router.get('/:id', (req, res) => {
   models.Sku.findOne({
     include: [{ model: models.Product, where: { id: req.params.id } }, { model: models.Image }]
   }).then(sku => {
+    console.log(sku);
     let p = sku.dataValues.Product;
     let images = sku.dataValues.Images;
     let product = {
@@ -13,8 +14,13 @@ router.get('/:id', (req, res) => {
       name: p.dataValues.name,
       description: sku.dataValues.description,
       price: sku.dataValues.price,
-      filename: images[0].dataValues.filename
+      filename: images[0].dataValues.filename,
+      stock: sku.dataValues.stock
     };
+
+    if (product.stock == 0) {
+      product.empty = true;
+    }
 
     res.render('product', { user: req.session.user, product: product });
   });
